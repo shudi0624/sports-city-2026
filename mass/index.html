@@ -1,0 +1,338 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>2026 運動城市大調查｜全民運動類9大指標</title>
+<style>
+:root{--green:#13b05d;--green-deep:#0d7f46;--green-dark:#0a5f35;--blue:#1676e5;--yellow:#f7c600;--ink:#173d2d;--muted:#6f7e76;--line:#dbe9e0;--head:#eef6f1;--up:#14864e;--down:#d75757;--same:#7d8a84}
+*{box-sizing:border-box}body{margin:0;background:transparent;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif;color:var(--ink)}
+.sc{max-width:980px;margin:0 auto;padding:0 0 12px}.sc input{position:absolute;opacity:0;pointer-events:none}
+.shell{overflow:hidden;background:linear-gradient(180deg,#fafffb 0%,#fffdf3 100%);border:1px solid #dbe7df;border-radius:24px;box-shadow:0 16px 34px rgba(8,95,53,.09)}
+.hero{position:relative;overflow:hidden;padding:15px 20px 13px;background:linear-gradient(120deg,var(--green-deep),var(--green));color:#fff}.hero:after{content:"";position:absolute;right:-50px;top:-32px;width:300px;height:110px;border-radius:999px;background:repeating-linear-gradient(135deg,rgba(247,198,0,.22) 0 18px,rgba(22,118,229,.18) 18px 36px,rgba(255,255,255,.08) 36px 54px)}
+.eyebrow{font-size:11px;font-weight:900;letter-spacing:.18em;color:#fff3a3;margin-bottom:4px}.title{margin:0;font-size:26px;line-height:1.12;font-weight:950}.title b{color:var(--yellow)}.sub{font-size:12px;margin-top:4px;opacity:.92}
+.body{padding:12px}
+.metric-tabs{display:flex;gap:6px;overflow-x:auto;padding:1px 1px 6px;scrollbar-width:none;-webkit-overflow-scrolling:touch}.metric-tabs::-webkit-scrollbar{display:none}
+.metric-tab{flex:0 0 auto;padding:9px 13px;border-radius:999px;background:#edf4ef;color:#315543;font-size:12px;font-weight:900;white-space:nowrap;cursor:pointer}
+.toolbar{display:flex;justify-content:space-between;align-items:flex-end;gap:8px;margin:3px 0 8px}.chips{display:inline-flex;gap:4px;padding:3px;background:#edf4ef;border-radius:999px}.chip{display:block;padding:8px 13px;border-radius:999px;color:#64746b;font-size:12px;font-weight:900;cursor:pointer}.note{font-size:10px;color:var(--muted)}
+#grp-metro:checked ~ .shell .chip-metro,#grp-county:checked ~ .shell .chip-county{background:#fff;color:var(--green-dark);box-shadow:0 2px 10px rgba(8,95,53,.12)}
+#metric-regular:checked ~ .shell .tab-regular{background:linear-gradient(135deg,#1f7dff,#0f5cc7);color:#fff;box-shadow:0 6px 14px rgba(15,92,199,.18)}#metric-regular:checked ~ #grp-metro:checked ~ .shell .p-regular-metro,#metric-regular:checked ~ #grp-county:checked ~ .shell .p-regular-county{display:block}#metric-bike:checked ~ .shell .tab-bike{background:linear-gradient(135deg,#1f7dff,#0f5cc7);color:#fff;box-shadow:0 6px 14px rgba(15,92,199,.18)}#metric-bike:checked ~ #grp-metro:checked ~ .shell .p-bike-metro,#metric-bike:checked ~ #grp-county:checked ~ .shell .p-bike-county{display:block}#metric-venues:checked ~ .shell .tab-venues{background:linear-gradient(135deg,#1f7dff,#0f5cc7);color:#fff;box-shadow:0 6px 14px rgba(15,92,199,.18)}#metric-venues:checked ~ #grp-metro:checked ~ .shell .p-venues-metro,#metric-venues:checked ~ #grp-county:checked ~ .shell .p-venues-county{display:block}#metric-venue-rate:checked ~ .shell .tab-venue-rate{background:linear-gradient(135deg,#1f7dff,#0f5cc7);color:#fff;box-shadow:0 6px 14px rgba(15,92,199,.18)}#metric-venue-rate:checked ~ #grp-metro:checked ~ .shell .p-venue-rate-metro,#metric-venue-rate:checked ~ #grp-county:checked ~ .shell .p-venue-rate-county{display:block}#metric-satisfaction:checked ~ .shell .tab-satisfaction{background:linear-gradient(135deg,#1f7dff,#0f5cc7);color:#fff;box-shadow:0 6px 14px rgba(15,92,199,.18)}#metric-satisfaction:checked ~ #grp-metro:checked ~ .shell .p-satisfaction-metro,#metric-satisfaction:checked ~ #grp-county:checked ~ .shell .p-satisfaction-county{display:block}#metric-centers:checked ~ .shell .tab-centers{background:linear-gradient(135deg,#1f7dff,#0f5cc7);color:#fff;box-shadow:0 6px 14px rgba(15,92,199,.18)}#metric-centers:checked ~ #grp-metro:checked ~ .shell .p-centers-metro,#metric-centers:checked ~ #grp-county:checked ~ .shell .p-centers-county{display:block}#metric-sporti:checked ~ .shell .tab-sporti{background:linear-gradient(135deg,#1f7dff,#0f5cc7);color:#fff;box-shadow:0 6px 14px rgba(15,92,199,.18)}#metric-sporti:checked ~ #grp-metro:checked ~ .shell .p-sporti-metro,#metric-sporti:checked ~ #grp-county:checked ~ .shell .p-sporti-county{display:block}#metric-volunteers:checked ~ .shell .tab-volunteers{background:linear-gradient(135deg,#1f7dff,#0f5cc7);color:#fff;box-shadow:0 6px 14px rgba(15,92,199,.18)}#metric-volunteers:checked ~ #grp-metro:checked ~ .shell .p-volunteers-metro,#metric-volunteers:checked ~ #grp-county:checked ~ .shell .p-volunteers-county{display:block}#metric-village:checked ~ .shell .tab-village{background:linear-gradient(135deg,#1f7dff,#0f5cc7);color:#fff;box-shadow:0 6px 14px rgba(15,92,199,.18)}#metric-village:checked ~ #grp-metro:checked ~ .shell .p-village-metro,#metric-village:checked ~ #grp-county:checked ~ .shell .p-village-county{display:block}
+.panel{display:none}.winner-card{display:grid;grid-template-columns:1fr auto;align-items:center;gap:8px;padding:10px 12px;margin-bottom:7px;border-radius:16px;background:linear-gradient(135deg,#fff9d2,#fffef5);border:1px solid #ecd66f}.winner-kicker{font-size:10px;font-weight:900;color:#8b6f16;margin-bottom:2px}.winner-name{font-size:22px;font-weight:950;line-height:1.05}.winner-points{text-align:right}.winner-points strong{display:block;font-size:26px;line-height:1;color:var(--green-dark)}.winner-points span{font-size:10px;color:#81775d}
+.table-wrap{overflow:hidden;border:1px solid var(--line);border-radius:16px;background:#fff;box-shadow:0 8px 18px rgba(8,95,53,.05)}table{width:100%;border-collapse:collapse;table-layout:fixed}th{padding:9px 5px;background:var(--head);border-bottom:1px solid var(--line);font-size:12px;font-weight:950;color:#315543;text-align:center}td{padding:9px 5px;border-bottom:1px solid #edf2ef;font-size:13px;text-align:center}tbody tr:last-child td{border-bottom:0}tbody tr:nth-child(even){background:#fbfdfb}.winner-row{background:linear-gradient(90deg,#fffbed,#fffef9)!important}.rank{width:54px;font-weight:950}.city{font-weight:900}.score{font-variant-numeric:tabular-nums;font-weight:850}.change{width:78px;font-weight:900}.medal{display:inline-grid;place-items:center;width:26px;height:26px;border-radius:50%;font-size:12px;font-weight:950}.m1{background:linear-gradient(145deg,#ffe875,#f2c100);color:#5f4700}.m2{background:linear-gradient(145deg,#f3f5f4,#cfd6d2);color:#5a6961}.m3{background:linear-gradient(145deg,#efbf97,#cf8442);color:#613616}.up{color:var(--up)}.down{color:var(--down)}.same{color:var(--same)}
+.foot{display:flex;justify-content:space-between;align-items:flex-end;gap:10px;padding:8px 2px 0;font-size:9.5px;color:#77867e;line-height:1.5}.brand{font-weight:950;color:var(--green-dark);white-space:nowrap}
+@media(max-width:640px){.shell{border-radius:0;border-left:0;border-right:0}.hero{padding:13px 15px 11px}.title{font-size:21px}.sub{font-size:10.5px}.body{padding:9px}.metric-tab{padding:8px 11px;font-size:11px}.winner-name{font-size:20px}.winner-points strong{font-size:24px}th{padding:8px 3px;font-size:10.5px}td{padding:8px 3px;font-size:12px}.rank{width:48px}.change{width:66px}.medal{width:24px;height:24px;font-size:11px}.foot{font-size:9px}}
+</style>
+</head>
+<body>
+<div class="sc">
+<input type="radio" name="metric" id="metric-regular" checked>
+<input type="radio" name="metric" id="metric-bike" >
+<input type="radio" name="metric" id="metric-venues" >
+<input type="radio" name="metric" id="metric-venue-rate" >
+<input type="radio" name="metric" id="metric-satisfaction" >
+<input type="radio" name="metric" id="metric-centers" >
+<input type="radio" name="metric" id="metric-sporti" >
+<input type="radio" name="metric" id="metric-volunteers" >
+<input type="radio" name="metric" id="metric-village" >
+<input type="radio" name="grp" id="grp-metro" checked>
+<input type="radio" name="grp" id="grp-county">
+<section class="shell">
+<header class="hero"><div class="eyebrow">SPORT CITY 2026</div><h2 class="title">2026《遠見》<b>全民運動類</b>9大指標</h2><div class="sub">點選指標切換｜六都、一般縣市分組排名</div></header>
+<div class="body">
+<div class="metric-tabs" aria-label="全民運動指標切換"><label class="metric-tab tab-regular" for="metric-regular">規律運動</label>
+<label class="metric-tab tab-bike" for="metric-bike">自行車道</label>
+<label class="metric-tab tab-venues" for="metric-venues">開放場館數</label>
+<label class="metric-tab tab-venue-rate" for="metric-venue-rate">開放比例</label>
+<label class="metric-tab tab-satisfaction" for="metric-satisfaction">設施滿意度</label>
+<label class="metric-tab tab-centers" for="metric-centers">運動中心</label>
+<label class="metric-tab tab-sporti" for="metric-sporti">運動 i 台灣</label>
+<label class="metric-tab tab-volunteers" for="metric-volunteers">體育志工</label>
+<label class="metric-tab tab-village" for="metric-village">運動村里</label></div>
+<div class="toolbar"><div class="chips"><label class="chip chip-metro" for="grp-metro">六都組</label><label class="chip chip-county" for="grp-county">一般縣市組</label></div><div class="note">¹ 與去年相比</div></div>
+
+<section class="panel p-regular-metro">
+  <div class="winner-card">
+    <div>
+      <div class="winner-kicker">六都組｜規律運動人口比例 第一名</div>
+      <div class="winner-name">👑 臺北市</div>
+    </div>
+    <div class="winner-points"><strong>39.6</strong><span>%</span></div>
+  </div>
+  <div class="table-wrap">
+    <table aria-label="規律運動人口比例 六都組 排名">
+      <thead><tr><th class="rank">名次</th><th>縣市</th><th>數據(%)</th><th class="change">升降¹</th></tr></thead>
+      <tbody><tr class="winner-row"><td class="rank"><span class="medal m1">1</span></td><td class="city">臺北市</td><td class="score">39.6</td><td class="change same">—</td></tr><tr class=""><td class="rank"><span class="medal m2">2</span></td><td class="city">高雄市</td><td class="score">38.0</td><td class="change same">—</td></tr><tr class=""><td class="rank"><span class="medal m3">3</span></td><td class="city">桃園市</td><td class="score">35.7</td><td class="change same">—</td></tr><tr class=""><td class="rank">4</td><td class="city">臺南市</td><td class="score">35.0</td><td class="change same">—</td></tr><tr class=""><td class="rank">5</td><td class="city">新北市</td><td class="score">34.1</td><td class="change same">—</td></tr><tr class=""><td class="rank">6</td><td class="city">臺中市</td><td class="score">33.0</td><td class="change same">—</td></tr></tbody>
+    </table>
+  </div>
+</section>
+<section class="panel p-regular-county">
+  <div class="winner-card">
+    <div>
+      <div class="winner-kicker">一般縣市組｜規律運動人口比例 第一名</div>
+      <div class="winner-name">👑 花蓮縣</div>
+    </div>
+    <div class="winner-points"><strong>40.2</strong><span>%</span></div>
+  </div>
+  <div class="table-wrap">
+    <table aria-label="規律運動人口比例 一般縣市組 排名">
+      <thead><tr><th class="rank">名次</th><th>縣市</th><th>數據(%)</th><th class="change">升降¹</th></tr></thead>
+      <tbody><tr class="winner-row"><td class="rank"><span class="medal m1">1</span></td><td class="city">花蓮縣</td><td class="score">40.2</td><td class="change down">↓1</td></tr><tr class=""><td class="rank"><span class="medal m2">2</span></td><td class="city">宜蘭縣</td><td class="score">39.8</td><td class="change same">—</td></tr><tr class=""><td class="rank"><span class="medal m3">3</span></td><td class="city">嘉義市</td><td class="score">38.9</td><td class="change down">↓1</td></tr><tr class=""><td class="rank">4</td><td class="city">連江縣</td><td class="score">38.7</td><td class="change up">↑1</td></tr><tr class=""><td class="rank">5</td><td class="city">澎湖縣</td><td class="score">38.4</td><td class="change same">—</td></tr><tr class=""><td class="rank">6</td><td class="city">臺東縣</td><td class="score">38.2</td><td class="change same">—</td></tr><tr class=""><td class="rank">6</td><td class="city">金門縣</td><td class="score">38.2</td><td class="change same">—</td></tr><tr class=""><td class="rank">8</td><td class="city">屏東縣</td><td class="score">37.4</td><td class="change up">↑1</td></tr><tr class=""><td class="rank">9</td><td class="city">新竹市</td><td class="score">36.0</td><td class="change same">—</td></tr><tr class=""><td class="rank">10</td><td class="city">南投縣</td><td class="score">35.4</td><td class="change same">—</td></tr></tbody>
+    </table>
+  </div>
+</section>
+<section class="panel p-bike-metro">
+  <div class="winner-card">
+    <div>
+      <div class="winner-kicker">六都組｜自行車道長度 第一名</div>
+      <div class="winner-name">👑 高雄市</div>
+    </div>
+    <div class="winner-points"><strong>1,811,428</strong><span>公尺</span></div>
+  </div>
+  <div class="table-wrap">
+    <table aria-label="自行車道長度 六都組 排名">
+      <thead><tr><th class="rank">名次</th><th>縣市</th><th>數據(公尺)</th><th class="change">升降¹</th></tr></thead>
+      <tbody><tr class="winner-row"><td class="rank"><span class="medal m1">1</span></td><td class="city">高雄市</td><td class="score">1,811,428</td><td class="change same">—</td></tr><tr class=""><td class="rank"><span class="medal m2">2</span></td><td class="city">臺中市</td><td class="score">1,190,443</td><td class="change same">—</td></tr><tr class=""><td class="rank"><span class="medal m3">3</span></td><td class="city">新北市</td><td class="score">749,931</td><td class="change down">↓2</td></tr><tr class=""><td class="rank">4</td><td class="city">桃園市</td><td class="score">543,537</td><td class="change same">—</td></tr><tr class=""><td class="rank">5</td><td class="city">臺南市</td><td class="score">537,862</td><td class="change up">↑2</td></tr><tr class=""><td class="rank">6</td><td class="city">臺北市</td><td class="score">531,313</td><td class="change same">—</td></tr></tbody>
+    </table>
+  </div>
+</section>
+<section class="panel p-bike-county">
+  <div class="winner-card">
+    <div>
+      <div class="winner-kicker">一般縣市組｜自行車道長度 第一名</div>
+      <div class="winner-name">👑 花蓮縣</div>
+    </div>
+    <div class="winner-points"><strong>862,479</strong><span>公尺</span></div>
+  </div>
+  <div class="table-wrap">
+    <table aria-label="自行車道長度 一般縣市組 排名">
+      <thead><tr><th class="rank">名次</th><th>縣市</th><th>數據(公尺)</th><th class="change">升降¹</th></tr></thead>
+      <tbody><tr class="winner-row"><td class="rank"><span class="medal m1">1</span></td><td class="city">花蓮縣</td><td class="score">862,479</td><td class="change same">—</td></tr><tr class=""><td class="rank"><span class="medal m2">2</span></td><td class="city">屏東縣</td><td class="score">793,730</td><td class="change down">↓1</td></tr><tr class=""><td class="rank"><span class="medal m3">3</span></td><td class="city">臺東縣</td><td class="score">596,396</td><td class="change same">—</td></tr><tr class=""><td class="rank">4</td><td class="city">彰化縣</td><td class="score">565,552</td><td class="change same">—</td></tr><tr class=""><td class="rank">5</td><td class="city">宜蘭縣</td><td class="score">542,373</td><td class="change down">↓1</td></tr><tr class=""><td class="rank">6</td><td class="city">嘉義縣</td><td class="score">532,402</td><td class="change same">—</td></tr><tr class=""><td class="rank">7</td><td class="city">南投縣</td><td class="score">486,399</td><td class="change same">—</td></tr><tr class=""><td class="rank">8</td><td class="city">雲林縣</td><td class="score">444,882</td><td class="change same">—</td></tr><tr class=""><td class="rank">9</td><td class="city">苗栗縣</td><td class="score">316,597</td><td class="change same">—</td></tr><tr class=""><td class="rank">10</td><td class="city">新竹縣</td><td class="score">240,229</td><td class="change same">—</td></tr></tbody>
+    </table>
+  </div>
+</section>
+<section class="panel p-venues-metro">
+  <div class="winner-card">
+    <div>
+      <div class="winner-kicker">六都組｜校園、公有對外開放（含租用）場館數 第一名</div>
+      <div class="winner-name">👑 新北市</div>
+    </div>
+    <div class="winner-points"><strong>1,118</strong><span>處</span></div>
+  </div>
+  <div class="table-wrap">
+    <table aria-label="校園、公有對外開放（含租用）場館數 六都組 排名">
+      <thead><tr><th class="rank">名次</th><th>縣市</th><th>數據(處)</th><th class="change">升降¹</th></tr></thead>
+      <tbody><tr class="winner-row"><td class="rank"><span class="medal m1">1</span></td><td class="city">新北市</td><td class="score">1,118</td><td class="change same">—</td></tr><tr class=""><td class="rank"><span class="medal m2">2</span></td><td class="city">高雄市</td><td class="score">1,073</td><td class="change down">↓1</td></tr><tr class=""><td class="rank"><span class="medal m3">3</span></td><td class="city">臺北市</td><td class="score">846</td><td class="change up">↑1</td></tr><tr class=""><td class="rank">4</td><td class="city">臺中市</td><td class="score">840</td><td class="change same">—</td></tr><tr class=""><td class="rank">5</td><td class="city">桃園市</td><td class="score">707</td><td class="change same">—</td></tr><tr class=""><td class="rank">6</td><td class="city">臺南市</td><td class="score">696</td><td class="change same">—</td></tr></tbody>
+    </table>
+  </div>
+</section>
+<section class="panel p-venues-county">
+  <div class="winner-card">
+    <div>
+      <div class="winner-kicker">一般縣市組｜校園、公有對外開放（含租用）場館數 第一名</div>
+      <div class="winner-name">👑 彰化縣</div>
+    </div>
+    <div class="winner-points"><strong>814</strong><span>處</span></div>
+  </div>
+  <div class="table-wrap">
+    <table aria-label="校園、公有對外開放（含租用）場館數 一般縣市組 排名">
+      <thead><tr><th class="rank">名次</th><th>縣市</th><th>數據(處)</th><th class="change">升降¹</th></tr></thead>
+      <tbody><tr class="winner-row"><td class="rank"><span class="medal m1">1</span></td><td class="city">彰化縣</td><td class="score">814</td><td class="change same">—</td></tr><tr class=""><td class="rank"><span class="medal m2">2</span></td><td class="city">雲林縣</td><td class="score">571</td><td class="change up">↑1</td></tr><tr class=""><td class="rank"><span class="medal m3">3</span></td><td class="city">屏東縣</td><td class="score">563</td><td class="change same">—</td></tr><tr class=""><td class="rank">4</td><td class="city">苗栗縣</td><td class="score">377</td><td class="change down">↓1</td></tr><tr class=""><td class="rank">5</td><td class="city">南投縣</td><td class="score">376</td><td class="change up">↑2</td></tr><tr class=""><td class="rank">6</td><td class="city">嘉義縣</td><td class="score">373</td><td class="change down">↓1</td></tr><tr class=""><td class="rank">7</td><td class="city">花蓮縣</td><td class="score">308</td><td class="change same">—</td></tr><tr class=""><td class="rank">8</td><td class="city">新竹縣</td><td class="score">303</td><td class="change up">↑1</td></tr><tr class=""><td class="rank">9</td><td class="city">宜蘭縣</td><td class="score">287</td><td class="change down">↓4</td></tr><tr class=""><td class="rank">10</td><td class="city">臺東縣</td><td class="score">262</td><td class="change down">↓2</td></tr></tbody>
+    </table>
+  </div>
+</section>
+<section class="panel p-venue-rate-metro">
+  <div class="winner-card">
+    <div>
+      <div class="winner-kicker">六都組｜校園、公有場館對外開放（含租用）比例 第一名</div>
+      <div class="winner-name">👑 新北市</div>
+    </div>
+    <div class="winner-points"><strong>75.2%</strong><span>%</span></div>
+  </div>
+  <div class="table-wrap">
+    <table aria-label="校園、公有場館對外開放（含租用）比例 六都組 排名">
+      <thead><tr><th class="rank">名次</th><th>縣市</th><th>數據(%)</th><th class="change">升降¹</th></tr></thead>
+      <tbody><tr class="winner-row"><td class="rank"><span class="medal m1">1</span></td><td class="city">新北市</td><td class="score">75.2%</td><td class="change same">—</td></tr><tr class=""><td class="rank"><span class="medal m2">2</span></td><td class="city">高雄市</td><td class="score">71.1%</td><td class="change down">↓2</td></tr><tr class=""><td class="rank"><span class="medal m3">3</span></td><td class="city">桃園市</td><td class="score">70.2%</td><td class="change same">—</td></tr><tr class=""><td class="rank">4</td><td class="city">臺中市</td><td class="score">67.5%</td><td class="change up">↑2</td></tr><tr class=""><td class="rank">5</td><td class="city">臺北市</td><td class="score">66.9%</td><td class="change down">↓2</td></tr><tr class=""><td class="rank">6</td><td class="city">臺南市</td><td class="score">63.7%</td><td class="change up">↑2</td></tr></tbody>
+    </table>
+  </div>
+</section>
+<section class="panel p-venue-rate-county">
+  <div class="winner-card">
+    <div>
+      <div class="winner-kicker">一般縣市組｜校園、公有場館對外開放（含租用）比例 第一名</div>
+      <div class="winner-name">👑 連江縣</div>
+    </div>
+    <div class="winner-points"><strong>86.2%</strong><span>%</span></div>
+  </div>
+  <div class="table-wrap">
+    <table aria-label="校園、公有場館對外開放（含租用）比例 一般縣市組 排名">
+      <thead><tr><th class="rank">名次</th><th>縣市</th><th>數據(%)</th><th class="change">升降¹</th></tr></thead>
+      <tbody><tr class="winner-row"><td class="rank"><span class="medal m1">1</span></td><td class="city">連江縣</td><td class="score">86.2%</td><td class="change up">↑15</td></tr><tr class=""><td class="rank"><span class="medal m2">2</span></td><td class="city">嘉義縣</td><td class="score">80.6%</td><td class="change up">↑7</td></tr><tr class=""><td class="rank"><span class="medal m3">3</span></td><td class="city">苗栗縣</td><td class="score">79.0%</td><td class="change same">—</td></tr><tr class=""><td class="rank">4</td><td class="city">彰化縣</td><td class="score">78.5%</td><td class="change down">↓5</td></tr><tr class=""><td class="rank">5</td><td class="city">澎湖縣</td><td class="score">78.4%</td><td class="change up">↑6</td></tr><tr class=""><td class="rank">6</td><td class="city">屏東縣</td><td class="score">78.3%</td><td class="change down">↓3</td></tr><tr class=""><td class="rank">7</td><td class="city">雲林縣</td><td class="score">78.0%</td><td class="change down">↓5</td></tr><tr class=""><td class="rank">8</td><td class="city">金門縣</td><td class="score">73.8%</td><td class="change down">↓4</td></tr><tr class=""><td class="rank">9</td><td class="city">南投縣</td><td class="score">72.9%</td><td class="change down">↓9</td></tr><tr class=""><td class="rank">10</td><td class="city">臺東縣</td><td class="score">72.2%</td><td class="change down">↓6</td></tr></tbody>
+    </table>
+  </div>
+</section>
+<section class="panel p-satisfaction-metro">
+  <div class="winner-card">
+    <div>
+      <div class="winner-kicker">六都組｜公眾運動場所設施滿意度 第一名</div>
+      <div class="winner-name">👑 臺中市</div>
+    </div>
+    <div class="winner-points"><strong>60.8</strong><span>%</span></div>
+  </div>
+  <div class="table-wrap">
+    <table aria-label="公眾運動場所設施滿意度 六都組 排名">
+      <thead><tr><th class="rank">名次</th><th>縣市</th><th>數據(%)</th><th class="change">升降¹</th></tr></thead>
+      <tbody><tr class="winner-row"><td class="rank"><span class="medal m1">1</span></td><td class="city">臺中市</td><td class="score">60.8</td><td class="change same">—</td></tr><tr class=""><td class="rank"><span class="medal m2">2</span></td><td class="city">臺北市</td><td class="score">58.2</td><td class="change same">—</td></tr><tr class=""><td class="rank"><span class="medal m3">3</span></td><td class="city">桃園市</td><td class="score">57.8</td><td class="change up">↑1</td></tr><tr class=""><td class="rank">4</td><td class="city">新北市</td><td class="score">56.1</td><td class="change same">—</td></tr><tr class=""><td class="rank">5</td><td class="city">高雄市</td><td class="score">54.4</td><td class="change down">↓1</td></tr><tr class=""><td class="rank">6</td><td class="city">臺南市</td><td class="score">48.0</td><td class="change same">—</td></tr></tbody>
+    </table>
+  </div>
+</section>
+<section class="panel p-satisfaction-county">
+  <div class="winner-card">
+    <div>
+      <div class="winner-kicker">一般縣市組｜公眾運動場所設施滿意度 第一名</div>
+      <div class="winner-name">👑 嘉義市</div>
+    </div>
+    <div class="winner-points"><strong>63.8</strong><span>%</span></div>
+  </div>
+  <div class="table-wrap">
+    <table aria-label="公眾運動場所設施滿意度 一般縣市組 排名">
+      <thead><tr><th class="rank">名次</th><th>縣市</th><th>數據(%)</th><th class="change">升降¹</th></tr></thead>
+      <tbody><tr class="winner-row"><td class="rank"><span class="medal m1">1</span></td><td class="city">嘉義市</td><td class="score">63.8</td><td class="change same">—</td></tr><tr class=""><td class="rank"><span class="medal m2">2</span></td><td class="city">連江縣</td><td class="score">62.9</td><td class="change same">—</td></tr><tr class=""><td class="rank"><span class="medal m3">3</span></td><td class="city">金門縣</td><td class="score">60.2</td><td class="change same">—</td></tr><tr class=""><td class="rank">4</td><td class="city">臺東縣</td><td class="score">58.3</td><td class="change same">—</td></tr><tr class=""><td class="rank">5</td><td class="city">新竹市</td><td class="score">58.3</td><td class="change same">—</td></tr><tr class=""><td class="rank">6</td><td class="city">屏東縣</td><td class="score">55.6</td><td class="change same">—</td></tr><tr class=""><td class="rank">7</td><td class="city">彰化縣</td><td class="score">54.6</td><td class="change same">—</td></tr><tr class=""><td class="rank">8</td><td class="city">宜蘭縣</td><td class="score">54.3</td><td class="change up">↑1</td></tr><tr class=""><td class="rank">9</td><td class="city">澎湖縣</td><td class="score">54.2</td><td class="change down">↓1</td></tr><tr class=""><td class="rank">10</td><td class="city">花蓮縣</td><td class="score">53.8</td><td class="change same">—</td></tr></tbody>
+    </table>
+  </div>
+</section>
+<section class="panel p-centers-metro">
+  <div class="winner-card">
+    <div>
+      <div class="winner-kicker">六都組｜國民運動中心數量 第一名</div>
+      <div class="winner-name">👑 新北市</div>
+    </div>
+    <div class="winner-points"><strong>16</strong><span>座</span></div>
+  </div>
+  <div class="table-wrap">
+    <table aria-label="國民運動中心數量 六都組 排名">
+      <thead><tr><th class="rank">名次</th><th>縣市</th><th>數據(座)</th><th class="change">升降¹</th></tr></thead>
+      <tbody><tr class="winner-row"><td class="rank"><span class="medal m1">1</span></td><td class="city">新北市</td><td class="score">16</td><td class="change same">—</td></tr><tr class=""><td class="rank"><span class="medal m2">2</span></td><td class="city">臺北市</td><td class="score">12</td><td class="change down">↓1</td></tr><tr class=""><td class="rank"><span class="medal m3">3</span></td><td class="city">高雄市</td><td class="score">11</td><td class="change same">—</td></tr><tr class=""><td class="rank">4</td><td class="city">桃園市</td><td class="score">9</td><td class="change up">↑1</td></tr><tr class=""><td class="rank">5</td><td class="city">臺中市</td><td class="score">7</td><td class="change down">↓1</td></tr><tr class=""><td class="rank">6</td><td class="city">臺南市</td><td class="score">1</td><td class="change same">—</td></tr></tbody>
+    </table>
+  </div>
+</section>
+<section class="panel p-centers-county">
+  <div class="winner-card">
+    <div>
+      <div class="winner-kicker">一般縣市組｜國民運動中心數量 第一名</div>
+      <div class="winner-name">👑 彰化縣</div>
+    </div>
+    <div class="winner-points"><strong>3</strong><span>座</span></div>
+  </div>
+  <div class="table-wrap">
+    <table aria-label="國民運動中心數量 一般縣市組 排名">
+      <thead><tr><th class="rank">名次</th><th>縣市</th><th>數據(座)</th><th class="change">升降¹</th></tr></thead>
+      <tbody><tr class="winner-row"><td class="rank"><span class="medal m1">1</span></td><td class="city">彰化縣</td><td class="score">3</td><td class="change same">—</td></tr><tr class=""><td class="rank"><span class="medal m2">2</span></td><td class="city">新竹市</td><td class="score">2</td><td class="change same">—</td></tr><tr class=""><td class="rank"><span class="medal m3">3</span></td><td class="city">嘉義市</td><td class="score">1</td><td class="change same">—</td></tr><tr class=""><td class="rank"><span class="medal m3">3</span></td><td class="city">屏東縣</td><td class="score">1</td><td class="change same">—</td></tr><tr class=""><td class="rank"><span class="medal m3">3</span></td><td class="city">宜蘭縣</td><td class="score">1</td><td class="change same">—</td></tr><tr class=""><td class="rank"><span class="medal m3">3</span></td><td class="city">新竹縣</td><td class="score">1</td><td class="change same">—</td></tr><tr class=""><td class="rank"><span class="medal m3">3</span></td><td class="city">雲林縣</td><td class="score">1</td><td class="change same">—</td></tr><tr class=""><td class="rank"><span class="medal m3">3</span></td><td class="city">基隆市</td><td class="score">1</td><td class="change same">—</td></tr></tbody>
+    </table>
+  </div>
+</section>
+<section class="panel p-sporti-metro">
+  <div class="winner-card">
+    <div>
+      <div class="winner-kicker">六都組｜獲頒運動 i 台灣績效特優次數 第一名</div>
+      <div class="winner-name">👑 臺北市</div>
+    </div>
+    <div class="winner-points"><strong>10</strong><span>次</span></div>
+  </div>
+  <div class="table-wrap">
+    <table aria-label="獲頒運動 i 台灣績效特優次數 六都組 排名">
+      <thead><tr><th class="rank">名次</th><th>縣市</th><th>數據(次)</th><th class="change">升降¹</th></tr></thead>
+      <tbody><tr class="winner-row"><td class="rank"><span class="medal m1">1</span></td><td class="city">臺北市</td><td class="score">10</td><td class="change same">—</td></tr><tr class=""><td class="rank"><span class="medal m2">2</span></td><td class="city">臺中市</td><td class="score">9</td><td class="change down">↓1</td></tr><tr class=""><td class="rank"><span class="medal m3">3</span></td><td class="city">桃園市</td><td class="score">7</td><td class="change same">—</td></tr><tr class=""><td class="rank">4</td><td class="city">新北市</td><td class="score">6</td><td class="change same">—</td></tr><tr class=""><td class="rank">5</td><td class="city">高雄市</td><td class="score">4</td><td class="change same">—</td></tr><tr class=""><td class="rank">5</td><td class="city">臺南市</td><td class="score">4</td><td class="change down">↓1</td></tr></tbody>
+    </table>
+  </div>
+</section>
+<section class="panel p-sporti-county">
+  <div class="winner-card">
+    <div>
+      <div class="winner-kicker">一般縣市組｜獲頒運動 i 台灣績效特優次數 第一名</div>
+      <div class="winner-name">👑 南投縣</div>
+    </div>
+    <div class="winner-points"><strong>9</strong><span>次</span></div>
+  </div>
+  <div class="table-wrap">
+    <table aria-label="獲頒運動 i 台灣績效特優次數 一般縣市組 排名">
+      <thead><tr><th class="rank">名次</th><th>縣市</th><th>數據(次)</th><th class="change">升降¹</th></tr></thead>
+      <tbody><tr class="winner-row"><td class="rank"><span class="medal m1">1</span></td><td class="city">南投縣</td><td class="score">9</td><td class="change same">—</td></tr><tr class=""><td class="rank"><span class="medal m2">2</span></td><td class="city">彰化縣</td><td class="score">8</td><td class="change same">—</td></tr><tr class=""><td class="rank"><span class="medal m3">3</span></td><td class="city">嘉義市</td><td class="score">5</td><td class="change same">—</td></tr><tr class=""><td class="rank">4</td><td class="city">新竹市</td><td class="score">4</td><td class="change same">—</td></tr><tr class=""><td class="rank">4</td><td class="city">宜蘭縣</td><td class="score">4</td><td class="change same">—</td></tr><tr class=""><td class="rank">4</td><td class="city">基隆市</td><td class="score">4</td><td class="change same">—</td></tr><tr class=""><td class="rank">4</td><td class="city">苗栗縣</td><td class="score">4</td><td class="change down">↓1</td></tr><tr class=""><td class="rank">8</td><td class="city">嘉義縣</td><td class="score">3</td><td class="change same">—</td></tr><tr class=""><td class="rank">9</td><td class="city">屏東縣</td><td class="score">2</td><td class="change up">↑2</td></tr><tr class=""><td class="rank">9</td><td class="city">臺東縣</td><td class="score">2</td><td class="change same">—</td></tr></tbody>
+    </table>
+  </div>
+</section>
+<section class="panel p-volunteers-metro">
+  <div class="winner-card">
+    <div>
+      <div class="winner-kicker">六都組｜推動體育運動志工人數 第一名</div>
+      <div class="winner-name">👑 臺北市</div>
+    </div>
+    <div class="winner-points"><strong>6,335</strong><span>人</span></div>
+  </div>
+  <div class="table-wrap">
+    <table aria-label="推動體育運動志工人數 六都組 排名">
+      <thead><tr><th class="rank">名次</th><th>縣市</th><th>數據(人數)</th><th class="change">升降¹</th></tr></thead>
+      <tbody><tr class="winner-row"><td class="rank"><span class="medal m1">1</span></td><td class="city">臺北市</td><td class="score">6,335</td><td class="change up">↑1</td></tr><tr class=""><td class="rank"><span class="medal m2">2</span></td><td class="city">新北市</td><td class="score">2,650</td><td class="change down">↓1</td></tr><tr class=""><td class="rank"><span class="medal m3">3</span></td><td class="city">臺中市</td><td class="score">1,520</td><td class="change same">—</td></tr><tr class=""><td class="rank">4</td><td class="city">桃園市</td><td class="score">798</td><td class="change down">↓1</td></tr><tr class=""><td class="rank">5</td><td class="city">臺南市</td><td class="score">311</td><td class="change same">—</td></tr><tr class=""><td class="rank">6</td><td class="city">高雄市</td><td class="score">68</td><td class="change up">↑1</td></tr></tbody>
+    </table>
+  </div>
+</section>
+<section class="panel p-volunteers-county">
+  <div class="winner-card">
+    <div>
+      <div class="winner-kicker">一般縣市組｜推動體育運動志工人數 第一名</div>
+      <div class="winner-name">👑 屏東縣</div>
+    </div>
+    <div class="winner-points"><strong>2,075</strong><span>人</span></div>
+  </div>
+  <div class="table-wrap">
+    <table aria-label="推動體育運動志工人數 一般縣市組 排名">
+      <thead><tr><th class="rank">名次</th><th>縣市</th><th>數據(人數)</th><th class="change">升降¹</th></tr></thead>
+      <tbody><tr class="winner-row"><td class="rank"><span class="medal m1">1</span></td><td class="city">屏東縣</td><td class="score">2,075</td><td class="change down">↓1</td></tr><tr class=""><td class="rank"><span class="medal m2">2</span></td><td class="city">嘉義市</td><td class="score">554</td><td class="change down">↓1</td></tr><tr class=""><td class="rank"><span class="medal m3">3</span></td><td class="city">嘉義縣</td><td class="score">522</td><td class="change down">↓2</td></tr><tr class=""><td class="rank">4</td><td class="city">基隆市</td><td class="score">411</td><td class="change same">—</td></tr><tr class=""><td class="rank">5</td><td class="city">南投縣</td><td class="score">187</td><td class="change same">—</td></tr><tr class=""><td class="rank">6</td><td class="city">彰化縣</td><td class="score">165</td><td class="change up">↑3</td></tr><tr class=""><td class="rank">7</td><td class="city">新竹縣</td><td class="score">165</td><td class="change down">↓3</td></tr><tr class=""><td class="rank">8</td><td class="city">新竹市</td><td class="score">111</td><td class="change down">↓4</td></tr><tr class=""><td class="rank">9</td><td class="city">臺東縣</td><td class="score">105</td><td class="change down">↓2</td></tr><tr class=""><td class="rank">10</td><td class="city">苗栗縣</td><td class="score">94</td><td class="change same">—</td></tr></tbody>
+    </table>
+  </div>
+</section>
+<section class="panel p-village-metro">
+  <div class="winner-card">
+    <div>
+      <div class="winner-kicker">六都組｜獲贈運動村里認證之比例 第一名</div>
+      <div class="winner-name">👑 臺北市</div>
+    </div>
+    <div class="winner-points"><strong>7.2%</strong><span>%</span></div>
+  </div>
+  <div class="table-wrap">
+    <table aria-label="獲贈運動村里認證之比例 六都組 排名">
+      <thead><tr><th class="rank">名次</th><th>縣市</th><th>數據(%)</th><th class="change">升降¹</th></tr></thead>
+      <tbody><tr class="winner-row"><td class="rank"><span class="medal m1">1</span></td><td class="city">臺北市</td><td class="score">7.2%</td><td class="change same">—</td></tr><tr class=""><td class="rank"><span class="medal m2">2</span></td><td class="city">桃園市</td><td class="score">4.2%</td><td class="change same">—</td></tr><tr class=""><td class="rank"><span class="medal m3">3</span></td><td class="city">臺中市</td><td class="score">3.0%</td><td class="change same">—</td></tr><tr class=""><td class="rank">4</td><td class="city">新北市</td><td class="score">1.5%</td><td class="change same">—</td></tr><tr class=""><td class="rank">5</td><td class="city">高雄市</td><td class="score">1.2%</td><td class="change same">—</td></tr><tr class=""><td class="rank">6</td><td class="city">臺南市</td><td class="score">1.2%</td><td class="change same">—</td></tr></tbody>
+    </table>
+  </div>
+</section>
+<section class="panel p-village-county">
+  <div class="winner-card">
+    <div>
+      <div class="winner-kicker">一般縣市組｜獲贈運動村里認證之比例 第一名</div>
+      <div class="winner-name">👑 南投縣</div>
+    </div>
+    <div class="winner-points"><strong>9.5%</strong><span>%</span></div>
+  </div>
+  <div class="table-wrap">
+    <table aria-label="獲贈運動村里認證之比例 一般縣市組 排名">
+      <thead><tr><th class="rank">名次</th><th>縣市</th><th>數據(%)</th><th class="change">升降¹</th></tr></thead>
+      <tbody><tr class="winner-row"><td class="rank"><span class="medal m1">1</span></td><td class="city">南投縣</td><td class="score">9.5%</td><td class="change down">↓3</td></tr><tr class=""><td class="rank"><span class="medal m2">2</span></td><td class="city">澎湖縣</td><td class="score">8.3%</td><td class="change down">↓1</td></tr><tr class=""><td class="rank"><span class="medal m3">3</span></td><td class="city">嘉義市</td><td class="score">7.1%</td><td class="change up">↑4</td></tr><tr class=""><td class="rank">4</td><td class="city">新竹市</td><td class="score">6.6%</td><td class="change down">↓2</td></tr><tr class=""><td class="rank">5</td><td class="city">基隆市</td><td class="score">3.8%</td><td class="change up">↑6</td></tr><tr class=""><td class="rank">6</td><td class="city">屏東縣</td><td class="score">3.6%</td><td class="change up">↑6</td></tr><tr class=""><td class="rank">7</td><td class="city">彰化縣</td><td class="score">2.9%</td><td class="change down">↓3</td></tr><tr class=""><td class="rank">8</td><td class="city">花蓮縣</td><td class="score">2.8%</td><td class="change up">↑3</td></tr><tr class=""><td class="rank">9</td><td class="city">金門縣</td><td class="score">2.7%</td><td class="change down">↓3</td></tr><tr class=""><td class="rank">10</td><td class="city">臺東縣</td><td class="score">2.2%</td><td class="change down">↓2</td></tr></tbody>
+    </table>
+  </div>
+</section>
+<footer class="foot"><div>資料：2026《遠見》運動城市大調查<br>各指標依調查資料呈現；六都與一般縣市分組排名。</div><div class="brand">表格整理｜遠見城市學</div></footer>
+</div></section></div>
+<script>
+(function(){
+  function sendHeight(){
+    var h=Math.ceil(document.documentElement.scrollHeight);
+    parent.postMessage({type:'sports-city-2026-mass-height',height:h},'*');
+  }
+  window.addEventListener('load',sendHeight);
+  window.addEventListener('resize',sendHeight);
+  document.addEventListener('change',function(e){if(e.target && e.target.matches('input[type=radio]')) setTimeout(sendHeight,50);});
+  if(window.ResizeObserver) new ResizeObserver(sendHeight).observe(document.body);
+  setTimeout(sendHeight,150);
+})();
+</script>
+</body></html>
