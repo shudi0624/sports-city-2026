@@ -1,0 +1,373 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>2026 運動城市大調查｜競技運動類11項指標</title>
+<style>
+:root{--green:#13b05d;--green-deep:#0d7f46;--green-dark:#0a5f35;--blue:#1676e5;--yellow:#f7c600;--ink:#173d2d;--muted:#6f7e76;--line:#dbe9e0;--head:#eef6f1;--up:#14864e;--down:#d75757;--same:#7d8a84}
+*{box-sizing:border-box}body{margin:0;background:transparent;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif;color:var(--ink)}
+.sc{max-width:980px;margin:0 auto;padding:0 0 12px}.sc input{position:absolute;opacity:0;pointer-events:none}
+.shell{overflow:hidden;background:linear-gradient(180deg,#fafffb 0%,#fffdf3 100%);border:1px solid #dbe7df;border-radius:24px;box-shadow:0 16px 34px rgba(8,95,53,.09)}
+.hero{position:relative;overflow:hidden;padding:15px 20px 13px;background:linear-gradient(120deg,var(--green-deep),var(--green));color:#fff}.hero:after{content:"";position:absolute;right:-50px;top:-32px;width:300px;height:110px;border-radius:999px;background:repeating-linear-gradient(135deg,rgba(247,198,0,.22) 0 18px,rgba(22,118,229,.18) 18px 36px,rgba(255,255,255,.08) 36px 54px)}
+.eyebrow{font-size:11px;font-weight:900;letter-spacing:.18em;color:#fff3a3;margin-bottom:4px}.title{margin:0;font-size:26px;line-height:1.12;font-weight:950}.title b{color:var(--yellow)}.sub{font-size:12px;margin-top:4px;opacity:.92}
+.body{padding:12px}
+.metric-tabs{display:flex;gap:6px;overflow-x:auto;padding:1px 1px 6px;scrollbar-width:none;-webkit-overflow-scrolling:touch}.metric-tabs::-webkit-scrollbar{display:none}
+.metric-tab{flex:0 0 auto;padding:9px 13px;border-radius:999px;background:#edf4ef;color:#315543;font-size:12px;font-weight:900;white-space:nowrap;cursor:pointer}
+.toolbar{display:flex;justify-content:space-between;align-items:flex-end;gap:8px;margin:3px 0 8px}.chips{display:inline-flex;gap:4px;padding:3px;background:#edf4ef;border-radius:999px}.chip{display:block;padding:8px 13px;border-radius:999px;color:#64746b;font-size:12px;font-weight:900;cursor:pointer}.note{font-size:10px;color:var(--muted)}
+#grp-metro:checked ~ .shell .chip-metro,#grp-county:checked ~ .shell .chip-county{background:#fff;color:var(--green-dark);box-shadow:0 2px 10px rgba(8,95,53,.12)}
+#metric-games-points:checked ~ .shell .tab-games-points{background:linear-gradient(135deg,#0c8b4a,#086337);color:#fff;box-shadow:0 6px 14px rgba(8,99,55,.18)}#metric-games-points:checked ~ #grp-metro:checked ~ .shell .p-games-points-metro,#metric-games-points:checked ~ #grp-county:checked ~ .shell .p-games-points-county{display:block}#metric-games-people:checked ~ .shell .tab-games-people{background:linear-gradient(135deg,#0c8b4a,#086337);color:#fff;box-shadow:0 6px 14px rgba(8,99,55,.18)}#metric-games-people:checked ~ #grp-metro:checked ~ .shell .p-games-people-metro,#metric-games-people:checked ~ #grp-county:checked ~ .shell .p-games-people-county{display:block}#metric-games-percap:checked ~ .shell .tab-games-percap{background:linear-gradient(135deg,#0c8b4a,#086337);color:#fff;box-shadow:0 6px 14px rgba(8,99,55,.18)}#metric-games-percap:checked ~ #grp-metro:checked ~ .shell .p-games-percap-metro,#metric-games-percap:checked ~ #grp-county:checked ~ .shell .p-games-percap-county{display:block}#metric-train-athletes:checked ~ .shell .tab-train-athletes{background:linear-gradient(135deg,#0c8b4a,#086337);color:#fff;box-shadow:0 6px 14px rgba(8,99,55,.18)}#metric-train-athletes:checked ~ #grp-metro:checked ~ .shell .p-train-athletes-metro,#metric-train-athletes:checked ~ #grp-county:checked ~ .shell .p-train-athletes-county{display:block}#metric-train-funding:checked ~ .shell .tab-train-funding{background:linear-gradient(135deg,#0c8b4a,#086337);color:#fff;box-shadow:0 6px 14px rgba(8,99,55,.18)}#metric-train-funding:checked ~ #grp-metro:checked ~ .shell .p-train-funding-metro,#metric-train-funding:checked ~ #grp-county:checked ~ .shell .p-train-funding-county{display:block}#metric-pro-teams:checked ~ .shell .tab-pro-teams{background:linear-gradient(135deg,#0c8b4a,#086337);color:#fff;box-shadow:0 6px 14px rgba(8,99,55,.18)}#metric-pro-teams:checked ~ #grp-metro:checked ~ .shell .p-pro-teams-metro,#metric-pro-teams:checked ~ #grp-county:checked ~ .shell .p-pro-teams-county{display:block}#metric-semi-teams:checked ~ .shell .tab-semi-teams{background:linear-gradient(135deg,#0c8b4a,#086337);color:#fff;box-shadow:0 6px 14px rgba(8,99,55,.18)}#metric-semi-teams:checked ~ #grp-metro:checked ~ .shell .p-semi-teams-metro,#metric-semi-teams:checked ~ #grp-county:checked ~ .shell .p-semi-teams-county{display:block}#metric-pro-sponsor:checked ~ .shell .tab-pro-sponsor{background:linear-gradient(135deg,#0c8b4a,#086337);color:#fff;box-shadow:0 6px 14px rgba(8,99,55,.18)}#metric-pro-sponsor:checked ~ #grp-metro:checked ~ .shell .p-pro-sponsor-metro,#metric-pro-sponsor:checked ~ #grp-county:checked ~ .shell .p-pro-sponsor-county{display:block}#metric-semi-sponsor:checked ~ .shell .tab-semi-sponsor{background:linear-gradient(135deg,#0c8b4a,#086337);color:#fff;box-shadow:0 6px 14px rgba(8,99,55,.18)}#metric-semi-sponsor:checked ~ #grp-metro:checked ~ .shell .p-semi-sponsor-metro,#metric-semi-sponsor:checked ~ #grp-county:checked ~ .shell .p-semi-sponsor-county{display:block}#metric-budget-total:checked ~ .shell .tab-budget-total{background:linear-gradient(135deg,#0c8b4a,#086337);color:#fff;box-shadow:0 6px 14px rgba(8,99,55,.18)}#metric-budget-total:checked ~ #grp-metro:checked ~ .shell .p-budget-total-metro,#metric-budget-total:checked ~ #grp-county:checked ~ .shell .p-budget-total-county{display:block}#metric-budget-percap:checked ~ .shell .tab-budget-percap{background:linear-gradient(135deg,#0c8b4a,#086337);color:#fff;box-shadow:0 6px 14px rgba(8,99,55,.18)}#metric-budget-percap:checked ~ #grp-metro:checked ~ .shell .p-budget-percap-metro,#metric-budget-percap:checked ~ #grp-county:checked ~ .shell .p-budget-percap-county{display:block}
+.panel{display:none}.winner-card{display:grid;grid-template-columns:1fr auto;align-items:center;gap:8px;padding:10px 12px;margin-bottom:7px;border-radius:16px;background:linear-gradient(135deg,#fff9d2,#fffef5);border:1px solid #ecd66f}.winner-kicker{font-size:10px;font-weight:900;color:#8b6f16;margin-bottom:2px}.winner-name{font-size:22px;font-weight:950;line-height:1.05}.winner-points{text-align:right}.winner-points strong{display:block;font-size:26px;line-height:1;color:var(--green-dark)}.winner-points span{font-size:10px;color:#81775d}
+.table-wrap{overflow:hidden;border:1px solid var(--line);border-radius:16px;background:#fff;box-shadow:0 8px 18px rgba(8,95,53,.05)}table{width:100%;border-collapse:collapse;table-layout:fixed}th{padding:9px 5px;background:var(--head);border-bottom:1px solid var(--line);font-size:12px;font-weight:950;color:#315543;text-align:center}td{padding:9px 5px;border-bottom:1px solid #edf2ef;font-size:13px;text-align:center}tbody tr:last-child td{border-bottom:0}tbody tr:nth-child(even){background:#fbfdfb}.winner-row{background:linear-gradient(90deg,#fffbed,#fffef9)!important}.rank{width:54px;font-weight:950}.city{font-weight:900}.score{font-variant-numeric:tabular-nums;font-weight:850}.change{width:66px;font-weight:900}.medal{display:inline-grid;place-items:center;width:26px;height:26px;border-radius:50%;font-size:12px;font-weight:950}.m1{background:linear-gradient(145deg,#ffe875,#f2c100);color:#5f4700}.m2{background:linear-gradient(145deg,#f3f5f4,#cfd6d2);color:#5a6961}.m3{background:linear-gradient(145deg,#efbf97,#cf8442);color:#613616}.up{color:var(--up)}.down{color:var(--down)}.same{color:var(--same)}
+.foot{display:flex;justify-content:space-between;align-items:flex-end;gap:10px;padding:8px 2px 0;font-size:9.5px;color:#77867e;line-height:1.5}.brand{font-weight:950;color:var(--green-dark);white-space:nowrap}
+@media(max-width:640px){.shell{border-radius:0;border-left:0;border-right:0}.hero{padding:13px 15px 11px}.title{font-size:21px}.sub{font-size:10.5px}.body{padding:9px}.metric-tab{padding:8px 11px;font-size:11px}.winner-name{font-size:20px}.winner-points strong{font-size:24px}th{padding:8px 3px;font-size:10.5px}td{padding:8px 3px;font-size:12px}.rank{width:48px}.change{width:66px}.medal{width:24px;height:24px;font-size:11px}.foot{font-size:9px}}
+</style>
+</head>
+<body>
+<div class="sc">
+<input type="radio" name="metric" id="metric-games-points" checked>
+<input type="radio" name="metric" id="metric-games-people" >
+<input type="radio" name="metric" id="metric-games-percap" >
+<input type="radio" name="metric" id="metric-train-athletes" >
+<input type="radio" name="metric" id="metric-train-funding" >
+<input type="radio" name="metric" id="metric-pro-teams" >
+<input type="radio" name="metric" id="metric-semi-teams" >
+<input type="radio" name="metric" id="metric-pro-sponsor" >
+<input type="radio" name="metric" id="metric-semi-sponsor" >
+<input type="radio" name="metric" id="metric-budget-total" >
+<input type="radio" name="metric" id="metric-budget-percap" >
+<input type="radio" name="grp" id="grp-metro" checked>
+<input type="radio" name="grp" id="grp-county">
+<section class="shell">
+<header class="hero"><div class="eyebrow">SPORT CITY 2026</div><h2 class="title">2026《遠見》<b>競技運動類</b>11項指標</h2><div class="sub">點選指標切換｜六都、一般縣市分組排名</div></header>
+<div class="body">
+<div class="metric-tabs" aria-label="競技運動指標切換"><label class="metric-tab tab-games-points" for="metric-games-points">運動會積分</label><label class="metric-tab tab-games-people" for="metric-games-people">參與人數</label><label class="metric-tab tab-games-percap" for="metric-games-percap">人均積分</label><label class="metric-tab tab-train-athletes" for="metric-train-athletes">培訓選手</label><label class="metric-tab tab-train-funding" for="metric-train-funding">培訓經費</label><label class="metric-tab tab-pro-teams" for="metric-pro-teams">職業隊數</label><label class="metric-tab tab-semi-teams" for="metric-semi-teams">半職業隊</label><label class="metric-tab tab-pro-sponsor" for="metric-pro-sponsor">職業贊助</label><label class="metric-tab tab-semi-sponsor" for="metric-semi-sponsor">半職業贊助</label><label class="metric-tab tab-budget-total" for="metric-budget-total">運動經費</label><label class="metric-tab tab-budget-percap" for="metric-budget-percap">人均經費</label></div>
+<div class="toolbar"><div class="chips"><label class="chip chip-metro" for="grp-metro">六都組</label><label class="chip chip-county" for="grp-county">一般縣市組</label></div><div class="note">¹ 與去年相比</div></div>
+<section class="panel p-games-points-metro">
+  <div class="winner-card">
+    <div>
+      <div class="winner-kicker">六都組｜全國性運動會積分 第一名</div>
+      <div class="winner-name">👑 臺北市</div>
+    </div>
+    <div class="winner-points"><strong>7,389</strong><span>分</span></div>
+  </div>
+  <div class="table-wrap">
+    <table aria-label="全國性運動會積分 六都組 排名">
+      <thead><tr><th class="rank">名次</th><th>縣市</th><th>數據(分)</th><th class="change">升降¹</th></tr></thead>
+      <tbody><tr class="winner-row"><td class="rank"><span class="medal m1">1</span></td><td class="city">臺北市</td><td class="score">7,389</td><td class="change same">—</td></tr><tr class=""><td class="rank"><span class="medal m2">2</span></td><td class="city">新北市</td><td class="score">6,557</td><td class="change same">—</td></tr><tr class=""><td class="rank"><span class="medal m3">3</span></td><td class="city">臺中市</td><td class="score">5,514</td><td class="change same">—</td></tr><tr class=""><td class="rank">4</td><td class="city">桃園市</td><td class="score">4,964</td><td class="change same">—</td></tr><tr class=""><td class="rank">5</td><td class="city">高雄市</td><td class="score">4,003</td><td class="change same">—</td></tr><tr class=""><td class="rank">6</td><td class="city">臺南市</td><td class="score">2,674</td><td class="change same">—</td></tr></tbody>
+    </table>
+  </div>
+</section><section class="panel p-games-points-county">
+  <div class="winner-card">
+    <div>
+      <div class="winner-kicker">一般縣市組｜全國性運動會積分 第一名</div>
+      <div class="winner-name">👑 花蓮縣</div>
+    </div>
+    <div class="winner-points"><strong>1,728</strong><span>分</span></div>
+  </div>
+  <div class="table-wrap">
+    <table aria-label="全國性運動會積分 一般縣市組 排名">
+      <thead><tr><th class="rank">名次</th><th>縣市</th><th>數據(分)</th><th class="change">升降¹</th></tr></thead>
+      <tbody><tr class="winner-row"><td class="rank"><span class="medal m1">1</span></td><td class="city">花蓮縣</td><td class="score">1,728</td><td class="change same">—</td></tr><tr class=""><td class="rank"><span class="medal m2">2</span></td><td class="city">屏東縣</td><td class="score">1,636</td><td class="change down">↓2</td></tr><tr class=""><td class="rank"><span class="medal m3">3</span></td><td class="city">彰化縣</td><td class="score">1,435</td><td class="change down">↓2</td></tr><tr class=""><td class="rank">4</td><td class="city">宜蘭縣</td><td class="score">1,315</td><td class="change same">—</td></tr><tr class=""><td class="rank">5</td><td class="city">臺東縣</td><td class="score">1,307</td><td class="change same">—</td></tr><tr class=""><td class="rank">6</td><td class="city">南投縣</td><td class="score">1,253</td><td class="change down">↓1</td></tr><tr class=""><td class="rank">7</td><td class="city">雲林縣</td><td class="score">1,194</td><td class="change same">—</td></tr><tr class=""><td class="rank">8</td><td class="city">新竹縣</td><td class="score">1,080</td><td class="change up">↑2</td></tr><tr class=""><td class="rank">9</td><td class="city">苗栗縣</td><td class="score">789</td><td class="change up">↑3</td></tr><tr class=""><td class="rank">10</td><td class="city">新竹市</td><td class="score">775</td><td class="change up">↑1</td></tr></tbody>
+    </table>
+  </div>
+</section><section class="panel p-games-people-metro">
+  <div class="winner-card">
+    <div>
+      <div class="winner-kicker">六都組｜全國性運動會參與人數 第一名</div>
+      <div class="winner-name">👑 新北市</div>
+    </div>
+    <div class="winner-points"><strong>4,133</strong><span>人</span></div>
+  </div>
+  <div class="table-wrap">
+    <table aria-label="全國性運動會參與人數 六都組 排名">
+      <thead><tr><th class="rank">名次</th><th>縣市</th><th>數據(人)</th><th class="change">升降¹</th></tr></thead>
+      <tbody><tr class="winner-row"><td class="rank"><span class="medal m1">1</span></td><td class="city">新北市</td><td class="score">4,133</td><td class="change same">—</td></tr><tr class=""><td class="rank"><span class="medal m2">2</span></td><td class="city">臺北市</td><td class="score">4,083</td><td class="change up">↑1</td></tr><tr class=""><td class="rank"><span class="medal m3">3</span></td><td class="city">桃園市</td><td class="score">3,683</td><td class="change down">↓1</td></tr><tr class=""><td class="rank">4</td><td class="city">臺中市</td><td class="score">3,561</td><td class="change down">↓1</td></tr><tr class=""><td class="rank">5</td><td class="city">高雄市</td><td class="score">3,468</td><td class="change same">—</td></tr><tr class=""><td class="rank">6</td><td class="city">臺南市</td><td class="score">2,366</td><td class="change up">↑1</td></tr></tbody>
+    </table>
+  </div>
+</section><section class="panel p-games-people-county">
+  <div class="winner-card">
+    <div>
+      <div class="winner-kicker">一般縣市組｜全國性運動會參與人數 第一名</div>
+      <div class="winner-name">👑 屏東縣</div>
+    </div>
+    <div class="winner-points"><strong>2,217</strong><span>人</span></div>
+  </div>
+  <div class="table-wrap">
+    <table aria-label="全國性運動會參與人數 一般縣市組 排名">
+      <thead><tr><th class="rank">名次</th><th>縣市</th><th>數據(人)</th><th class="change">升降¹</th></tr></thead>
+      <tbody><tr class="winner-row"><td class="rank"><span class="medal m1">1</span></td><td class="city">屏東縣</td><td class="score">2,217</td><td class="change same">—</td></tr><tr class=""><td class="rank"><span class="medal m2">2</span></td><td class="city">花蓮縣</td><td class="score">1,822</td><td class="change up">↑3</td></tr><tr class=""><td class="rank"><span class="medal m3">3</span></td><td class="city">宜蘭縣</td><td class="score">1,730</td><td class="change same">—</td></tr><tr class=""><td class="rank">4</td><td class="city">雲林縣</td><td class="score">1,638</td><td class="change same">—</td></tr><tr class=""><td class="rank">5</td><td class="city">彰化縣</td><td class="score">1,519</td><td class="change down">↓1</td></tr><tr class=""><td class="rank">6</td><td class="city">南投縣</td><td class="score">1,514</td><td class="change same">—</td></tr><tr class=""><td class="rank">7</td><td class="city">臺東縣</td><td class="score">1,476</td><td class="change same">—</td></tr><tr class=""><td class="rank">8</td><td class="city">新竹縣</td><td class="score">1,413</td><td class="change same">—</td></tr><tr class=""><td class="rank">9</td><td class="city">苗栗縣</td><td class="score">1,055</td><td class="change same">—</td></tr><tr class=""><td class="rank">10</td><td class="city">基隆市</td><td class="score">947</td><td class="change same">—</td></tr></tbody>
+    </table>
+  </div>
+</section><section class="panel p-games-percap-metro">
+  <div class="winner-card">
+    <div>
+      <div class="winner-kicker">六都組｜每位參與全國性運動會人員獲得積分數 第一名</div>
+      <div class="winner-name">👑 臺北市</div>
+    </div>
+    <div class="winner-points"><strong>1.81</strong><span>分</span></div>
+  </div>
+  <div class="table-wrap">
+    <table aria-label="每位參與全國性運動會人員獲得積分數 六都組 排名">
+      <thead><tr><th class="rank">名次</th><th>縣市</th><th>數據(分)</th><th class="change">升降¹</th></tr></thead>
+      <tbody><tr class="winner-row"><td class="rank"><span class="medal m1">1</span></td><td class="city">臺北市</td><td class="score">1.81</td><td class="change down">↓1</td></tr><tr class=""><td class="rank"><span class="medal m2">2</span></td><td class="city">新北市</td><td class="score">1.59</td><td class="change same">—</td></tr><tr class=""><td class="rank"><span class="medal m3">3</span></td><td class="city">臺中市</td><td class="score">1.55</td><td class="change same">—</td></tr><tr class=""><td class="rank">4</td><td class="city">桃園市</td><td class="score">1.35</td><td class="change up">↑1</td></tr><tr class=""><td class="rank">5</td><td class="city">高雄市</td><td class="score">1.15</td><td class="change same">—</td></tr><tr class=""><td class="rank">6</td><td class="city">臺南市</td><td class="score">1.13</td><td class="change same">—</td></tr></tbody>
+    </table>
+  </div>
+</section><section class="panel p-games-percap-county">
+  <div class="winner-card">
+    <div>
+      <div class="winner-kicker">一般縣市組｜每位參與全國性運動會人員獲得積分數 第一名</div>
+      <div class="winner-name">👑 連江縣</div>
+    </div>
+    <div class="winner-points"><strong>1.46</strong><span>分</span></div>
+  </div>
+  <div class="table-wrap">
+    <table aria-label="每位參與全國性運動會人員獲得積分數 一般縣市組 排名">
+      <thead><tr><th class="rank">名次</th><th>縣市</th><th>數據(分)</th><th class="change">升降¹</th></tr></thead>
+      <tbody><tr class="winner-row"><td class="rank"><span class="medal m1">1</span></td><td class="city">連江縣</td><td class="score">1.46</td><td class="change same">—</td></tr><tr class=""><td class="rank"><span class="medal m2">2</span></td><td class="city">新竹市</td><td class="score">1.07</td><td class="change down">↓8</td></tr><tr class=""><td class="rank"><span class="medal m3">3</span></td><td class="city">花蓮縣</td><td class="score">0.95</td><td class="change down">↓1</td></tr><tr class=""><td class="rank">4</td><td class="city">彰化縣</td><td class="score">0.94</td><td class="change down">↓1</td></tr><tr class=""><td class="rank">5</td><td class="city">臺東縣</td><td class="score">0.89</td><td class="change up">↑4</td></tr><tr class=""><td class="rank">6</td><td class="city">南投縣</td><td class="score">0.83</td><td class="change down">↓4</td></tr><tr class=""><td class="rank">7</td><td class="city">新竹縣</td><td class="score">0.76</td><td class="change down">↓1</td></tr><tr class=""><td class="rank">8</td><td class="city">宜蘭縣</td><td class="score">0.76</td><td class="change up">↑4</td></tr><tr class=""><td class="rank">9</td><td class="city">苗栗縣</td><td class="score">0.75</td><td class="change up">↑3</td></tr><tr class=""><td class="rank">10</td><td class="city">屏東縣</td><td class="score">0.74</td><td class="change up">↑2</td></tr></tbody>
+    </table>
+  </div>
+</section><section class="panel p-train-athletes-metro">
+  <div class="winner-card">
+    <div>
+      <div class="winner-kicker">六都組｜基層運動選手訓練站培訓選手數 第一名</div>
+      <div class="winner-name">👑 新北市</div>
+    </div>
+    <div class="winner-points"><strong>4,530</strong><span>人</span></div>
+  </div>
+  <div class="table-wrap">
+    <table aria-label="基層運動選手訓練站培訓選手數 六都組 排名">
+      <thead><tr><th class="rank">名次</th><th>縣市</th><th>數據(人)</th><th class="change">升降¹</th></tr></thead>
+      <tbody><tr class="winner-row"><td class="rank"><span class="medal m1">1</span></td><td class="city">新北市</td><td class="score">4,530</td><td class="change same">—</td></tr><tr class=""><td class="rank"><span class="medal m2">2</span></td><td class="city">臺中市</td><td class="score">4,150</td><td class="change same">—</td></tr><tr class=""><td class="rank"><span class="medal m3">3</span></td><td class="city">臺北市</td><td class="score">4,070</td><td class="change same">—</td></tr><tr class=""><td class="rank">4</td><td class="city">桃園市</td><td class="score">3,049</td><td class="change same">—</td></tr><tr class=""><td class="rank">5</td><td class="city">高雄市</td><td class="score">2,660</td><td class="change same">—</td></tr><tr class=""><td class="rank">6</td><td class="city">臺南市</td><td class="score">1,817</td><td class="change same">—</td></tr></tbody>
+    </table>
+  </div>
+</section><section class="panel p-train-athletes-county">
+  <div class="winner-card">
+    <div>
+      <div class="winner-kicker">一般縣市組｜基層運動選手訓練站培訓選手數 第一名</div>
+      <div class="winner-name">👑 新竹市</div>
+    </div>
+    <div class="winner-points"><strong>3,064</strong><span>人</span></div>
+  </div>
+  <div class="table-wrap">
+    <table aria-label="基層運動選手訓練站培訓選手數 一般縣市組 排名">
+      <thead><tr><th class="rank">名次</th><th>縣市</th><th>數據(人)</th><th class="change">升降¹</th></tr></thead>
+      <tbody><tr class="winner-row"><td class="rank"><span class="medal m1">1</span></td><td class="city">新竹市</td><td class="score">3,064</td><td class="change same">—</td></tr><tr class=""><td class="rank"><span class="medal m2">2</span></td><td class="city">嘉義縣</td><td class="score">2,430</td><td class="change same">—</td></tr><tr class=""><td class="rank"><span class="medal m3">3</span></td><td class="city">苗栗縣</td><td class="score">2,402</td><td class="change same">—</td></tr><tr class=""><td class="rank">4</td><td class="city">雲林縣</td><td class="score">2,329</td><td class="change same">—</td></tr><tr class=""><td class="rank">5</td><td class="city">彰化縣</td><td class="score">1,934</td><td class="change same">—</td></tr><tr class=""><td class="rank">6</td><td class="city">屏東縣</td><td class="score">1,842</td><td class="change same">—</td></tr><tr class=""><td class="rank">7</td><td class="city">新竹縣</td><td class="score">1,761</td><td class="change same">—</td></tr><tr class=""><td class="rank">8</td><td class="city">宜蘭縣</td><td class="score">1,656</td><td class="change same">—</td></tr><tr class=""><td class="rank">9</td><td class="city">基隆市</td><td class="score">1,624</td><td class="change same">—</td></tr><tr class=""><td class="rank">10</td><td class="city">南投縣</td><td class="score">1,547</td><td class="change same">—</td></tr></tbody>
+    </table>
+  </div>
+</section><section class="panel p-train-funding-metro">
+  <div class="winner-card">
+    <div>
+      <div class="winner-kicker">六都組｜平均每位基層選手培訓經費 第一名</div>
+      <div class="winner-name">👑 臺南市</div>
+    </div>
+    <div class="winner-points"><strong>10,429</strong><span>元</span></div>
+  </div>
+  <div class="table-wrap">
+    <table aria-label="平均每位基層選手培訓經費 六都組 排名">
+      <thead><tr><th class="rank">名次</th><th>縣市</th><th>數據(元)</th><th class="change">升降¹</th></tr></thead>
+      <tbody><tr class="winner-row"><td class="rank"><span class="medal m1">1</span></td><td class="city">臺南市</td><td class="score">10,429</td><td class="change same">—</td></tr><tr class=""><td class="rank"><span class="medal m2">2</span></td><td class="city">高雄市</td><td class="score">9,135</td><td class="change same">—</td></tr><tr class=""><td class="rank"><span class="medal m3">3</span></td><td class="city">臺中市</td><td class="score">6,265</td><td class="change same">—</td></tr><tr class=""><td class="rank">4</td><td class="city">桃園市</td><td class="score">5,838</td><td class="change same">—</td></tr><tr class=""><td class="rank">5</td><td class="city">臺北市</td><td class="score">5,086</td><td class="change same">—</td></tr><tr class=""><td class="rank">6</td><td class="city">新北市</td><td class="score">4,934</td><td class="change same">—</td></tr></tbody>
+    </table>
+  </div>
+</section><section class="panel p-train-funding-county">
+  <div class="winner-card">
+    <div>
+      <div class="winner-kicker">一般縣市組｜平均每位基層選手培訓經費 第一名</div>
+      <div class="winner-name">👑 連江縣</div>
+    </div>
+    <div class="winner-points"><strong>38,789</strong><span>元</span></div>
+  </div>
+  <div class="table-wrap">
+    <table aria-label="平均每位基層選手培訓經費 一般縣市組 排名">
+      <thead><tr><th class="rank">名次</th><th>縣市</th><th>數據(元)</th><th class="change">升降¹</th></tr></thead>
+      <tbody><tr class="winner-row"><td class="rank"><span class="medal m1">1</span></td><td class="city">連江縣</td><td class="score">38,789</td><td class="change same">—</td></tr><tr class=""><td class="rank"><span class="medal m2">2</span></td><td class="city">臺東縣</td><td class="score">13,817</td><td class="change same">—</td></tr><tr class=""><td class="rank"><span class="medal m3">3</span></td><td class="city">嘉義市</td><td class="score">10,377</td><td class="change same">—</td></tr><tr class=""><td class="rank">4</td><td class="city">宜蘭縣</td><td class="score">9,209</td><td class="change same">—</td></tr><tr class=""><td class="rank">5</td><td class="city">南投縣</td><td class="score">9,017</td><td class="change same">—</td></tr><tr class=""><td class="rank">6</td><td class="city">花蓮縣</td><td class="score">8,524</td><td class="change same">—</td></tr><tr class=""><td class="rank">7</td><td class="city">金門縣</td><td class="score">7,984</td><td class="change same">—</td></tr><tr class=""><td class="rank">8</td><td class="city">彰化縣</td><td class="score">7,834</td><td class="change same">—</td></tr><tr class=""><td class="rank">9</td><td class="city">澎湖縣</td><td class="score">7,760</td><td class="change same">—</td></tr><tr class=""><td class="rank">10</td><td class="city">屏東縣</td><td class="score">7,383</td><td class="change same">—</td></tr></tbody>
+    </table>
+  </div>
+</section><section class="panel p-pro-teams-metro">
+  <div class="winner-card">
+    <div>
+      <div class="winner-kicker">六都組｜職業運動隊伍數 第一名</div>
+      <div class="winner-name">👑 臺北市</div>
+    </div>
+    <div class="winner-points"><strong>5</strong><span>隊</span></div>
+  </div>
+  <div class="table-wrap">
+    <table aria-label="職業運動隊伍數 六都組 排名">
+      <thead><tr><th class="rank">名次</th><th>縣市</th><th>數據(隊)</th><th class="change">升降¹</th></tr></thead>
+      <tbody><tr class="winner-row"><td class="rank"><span class="medal m1">1</span></td><td class="city">臺北市</td><td class="score">5</td><td class="change same">—</td></tr><tr class=""><td class="rank"><span class="medal m2">2</span></td><td class="city">新北市</td><td class="score">4</td><td class="change same">—</td></tr><tr class=""><td class="rank"><span class="medal m3">3</span></td><td class="city">桃園市</td><td class="score">3</td><td class="change up">↑2</td></tr><tr class=""><td class="rank"><span class="medal m3">3</span></td><td class="city">臺中市</td><td class="score">3</td><td class="change same">—</td></tr><tr class=""><td class="rank"><span class="medal m3">3</span></td><td class="city">高雄市</td><td class="score">3</td><td class="change down">↓2</td></tr><tr class=""><td class="rank">6</td><td class="city">臺南市</td><td class="score">2</td><td class="change down">↓1</td></tr></tbody>
+    </table>
+  </div>
+</section><section class="panel p-pro-teams-county">
+  <div class="winner-card">
+    <div>
+      <div class="winner-kicker">一般縣市組｜職業運動隊伍數 第一名</div>
+      <div class="winner-name">👑 彰化縣</div>
+    </div>
+    <div class="winner-points"><strong>2</strong><span>隊</span></div>
+  </div>
+  <div class="table-wrap">
+    <table aria-label="職業運動隊伍數 一般縣市組 排名">
+      <thead><tr><th class="rank">名次</th><th>縣市</th><th>數據(隊)</th><th class="change">升降¹</th></tr></thead>
+      <tbody><tr class="winner-row"><td class="rank"><span class="medal m1">1</span></td><td class="city">彰化縣</td><td class="score">2</td><td class="change down">↓1</td></tr><tr class=""><td class="rank"><span class="medal m2">2</span></td><td class="city">新竹縣</td><td class="score">1</td><td class="change down">↓3</td></tr><tr class=""><td class="rank"><span class="medal m2">2</span></td><td class="city">新竹市</td><td class="score">1</td><td class="change down">↓1</td></tr></tbody>
+    </table>
+  </div>
+</section><section class="panel p-semi-teams-metro">
+  <div class="winner-card">
+    <div>
+      <div class="winner-kicker">六都組｜半職業運動隊伍數 第一名</div>
+      <div class="winner-name">👑 新北市</div>
+    </div>
+    <div class="winner-points"><strong>9</strong><span>隊</span></div>
+  </div>
+  <div class="table-wrap">
+    <table aria-label="半職業運動隊伍數 六都組 排名">
+      <thead><tr><th class="rank">名次</th><th>縣市</th><th>數據(隊)</th><th class="change">升降¹</th></tr></thead>
+      <tbody><tr class="winner-row"><td class="rank"><span class="medal m1">1</span></td><td class="city">新北市</td><td class="score">9</td><td class="change up">↑1</td></tr><tr class=""><td class="rank"><span class="medal m2">2</span></td><td class="city">臺中市</td><td class="score">8</td><td class="change same">—</td></tr><tr class=""><td class="rank"><span class="medal m3">3</span></td><td class="city">臺北市</td><td class="score">5</td><td class="change same">—</td></tr><tr class=""><td class="rank">4</td><td class="city">高雄市</td><td class="score">4</td><td class="change same">—</td></tr><tr class=""><td class="rank">5</td><td class="city">臺南市</td><td class="score">2</td><td class="change down">↓1</td></tr><tr class=""><td class="rank">6</td><td class="city">桃園市</td><td class="score">1</td><td class="change same">—</td></tr></tbody>
+    </table>
+  </div>
+</section><section class="panel p-semi-teams-county">
+  <div class="winner-card">
+    <div>
+      <div class="winner-kicker">一般縣市組｜半職業運動隊伍數 第一名</div>
+      <div class="winner-name">👑 屏東縣</div>
+    </div>
+    <div class="winner-points"><strong>2</strong><span>隊</span></div>
+  </div>
+  <div class="table-wrap">
+    <table aria-label="半職業運動隊伍數 一般縣市組 排名">
+      <thead><tr><th class="rank">名次</th><th>縣市</th><th>數據(隊)</th><th class="change">升降¹</th></tr></thead>
+      <tbody><tr class="winner-row"><td class="rank"><span class="medal m1">1</span></td><td class="city">屏東縣</td><td class="score">2</td><td class="change same">—</td></tr><tr class=""><td class="rank"><span class="medal m2">2</span></td><td class="city">彰化縣</td><td class="score">1</td><td class="change up">↑1</td></tr><tr class=""><td class="rank"><span class="medal m2">2</span></td><td class="city">新竹市</td><td class="score">1</td><td class="change same">—</td></tr><tr class=""><td class="rank"><span class="medal m2">2</span></td><td class="city">南投縣</td><td class="score">1</td><td class="change down">↓5</td></tr><tr class=""><td class="rank"><span class="medal m2">2</span></td><td class="city">花蓮縣</td><td class="score">1</td><td class="change up">↑1</td></tr><tr class=""><td class="rank"><span class="medal m2">2</span></td><td class="city">雲林縣</td><td class="score">1</td><td class="change up">↑1</td></tr><tr class=""><td class="rank"><span class="medal m2">2</span></td><td class="city">基隆市</td><td class="score">1</td><td class="change up">↑6</td></tr></tbody>
+    </table>
+  </div>
+</section><section class="panel p-pro-sponsor-metro">
+  <div class="winner-card">
+    <div>
+      <div class="winner-kicker">六都組｜職業運動隊伍縣市贊助金額 第一名</div>
+      <div class="winner-name">👑 臺北市</div>
+    </div>
+    <div class="winner-points"><strong>158,500,000</strong><span>元</span></div>
+  </div>
+  <div class="table-wrap">
+    <table aria-label="職業運動隊伍縣市贊助金額 六都組 排名">
+      <thead><tr><th class="rank">名次</th><th>縣市</th><th>數據(元)</th><th class="change">升降¹</th></tr></thead>
+      <tbody><tr class="winner-row"><td class="rank"><span class="medal m1">1</span></td><td class="city">臺北市</td><td class="score">158,500,000</td><td class="change same">—</td></tr><tr class=""><td class="rank"><span class="medal m2">2</span></td><td class="city">新北市</td><td class="score">157,560,278</td><td class="change same">—</td></tr><tr class=""><td class="rank"><span class="medal m3">3</span></td><td class="city">高雄市</td><td class="score">8,100,000</td><td class="change up">↑3</td></tr><tr class=""><td class="rank">4</td><td class="city">桃園市</td><td class="score">6,500,000</td><td class="change down">↓1</td></tr><tr class=""><td class="rank">5</td><td class="city">臺中市</td><td class="score">2,000,000</td><td class="change down">↓1</td></tr></tbody>
+    </table>
+  </div>
+</section><section class="panel p-pro-sponsor-county">
+  <div class="winner-card">
+    <div>
+      <div class="winner-kicker">一般縣市組｜職業運動隊伍縣市贊助金額 第一名</div>
+      <div class="winner-name">👑 彰化縣</div>
+    </div>
+    <div class="winner-points"><strong>7,500,000</strong><span>元</span></div>
+  </div>
+  <div class="table-wrap">
+    <table aria-label="職業運動隊伍縣市贊助金額 一般縣市組 排名">
+      <thead><tr><th class="rank">名次</th><th>縣市</th><th>數據(元)</th><th class="change">升降¹</th></tr></thead>
+      <tbody><tr class="winner-row"><td class="rank"><span class="medal m1">1</span></td><td class="city">彰化縣</td><td class="score">7,500,000</td><td class="change down">↓2</td></tr><tr class=""><td class="rank"><span class="medal m2">2</span></td><td class="city">金門縣</td><td class="score">4,500,000</td><td class="change down">↓2</td></tr><tr class=""><td class="rank"><span class="medal m3">3</span></td><td class="city">新竹市</td><td class="score">3,000,000</td><td class="change down">↓1</td></tr><tr class=""><td class="rank"><span class="medal m3">3</span></td><td class="city">新竹縣</td><td class="score">3,000,000</td><td class="change down">↓2</td></tr></tbody>
+    </table>
+  </div>
+</section><section class="panel p-semi-sponsor-metro">
+  <div class="winner-card">
+    <div>
+      <div class="winner-kicker">六都組｜半職業運動隊伍縣市贊助金額 第一名</div>
+      <div class="winner-name">👑 臺北市</div>
+    </div>
+    <div class="winner-points"><strong>77,102,044</strong><span>元</span></div>
+  </div>
+  <div class="table-wrap">
+    <table aria-label="半職業運動隊伍縣市贊助金額 六都組 排名">
+      <thead><tr><th class="rank">名次</th><th>縣市</th><th>數據(元)</th><th class="change">升降¹</th></tr></thead>
+      <tbody><tr class="winner-row"><td class="rank"><span class="medal m1">1</span></td><td class="city">臺北市</td><td class="score">77,102,044</td><td class="change down">↓1</td></tr><tr class=""><td class="rank"><span class="medal m2">2</span></td><td class="city">新北市</td><td class="score">58,285,000</td><td class="change same">—</td></tr><tr class=""><td class="rank"><span class="medal m3">3</span></td><td class="city">臺南市</td><td class="score">34,560,000</td><td class="change up">↑2</td></tr><tr class=""><td class="rank">4</td><td class="city">臺中市</td><td class="score">11,700,000</td><td class="change same">—</td></tr><tr class=""><td class="rank">5</td><td class="city">高雄市</td><td class="score">3,680,000</td><td class="change same">—</td></tr><tr class=""><td class="rank">6</td><td class="city">桃園市</td><td class="score">900,000</td><td class="change down">↓1</td></tr></tbody>
+    </table>
+  </div>
+</section><section class="panel p-semi-sponsor-county">
+  <div class="winner-card">
+    <div>
+      <div class="winner-kicker">一般縣市組｜半職業運動隊伍縣市贊助金額 第一名</div>
+      <div class="winner-name">👑 新竹市</div>
+    </div>
+    <div class="winner-points"><strong>36,201,713</strong><span>元</span></div>
+  </div>
+  <div class="table-wrap">
+    <table aria-label="半職業運動隊伍縣市贊助金額 一般縣市組 排名">
+      <thead><tr><th class="rank">名次</th><th>縣市</th><th>數據(元)</th><th class="change">升降¹</th></tr></thead>
+      <tbody><tr class="winner-row"><td class="rank"><span class="medal m1">1</span></td><td class="city">新竹市</td><td class="score">36,201,713</td><td class="change down">↓1</td></tr><tr class=""><td class="rank"><span class="medal m2">2</span></td><td class="city">屏東縣</td><td class="score">32,500,000</td><td class="change down">↓1</td></tr><tr class=""><td class="rank"><span class="medal m3">3</span></td><td class="city">基隆市</td><td class="score">25,000,000</td><td class="change down">↓1</td></tr><tr class=""><td class="rank">4</td><td class="city">花蓮縣</td><td class="score">3,000,000</td><td class="change down">↓1</td></tr><tr class=""><td class="rank">5</td><td class="city">雲林縣</td><td class="score">1,000,000</td><td class="change down">↓1</td></tr><tr class=""><td class="rank">6</td><td class="city">南投縣</td><td class="score">500,000</td><td class="change down">↓1</td></tr></tbody>
+    </table>
+  </div>
+</section><section class="panel p-budget-total-metro">
+  <div class="winner-card">
+    <div>
+      <div class="winner-kicker">六都組｜體育運動經費總額 第一名</div>
+      <div class="winner-name">👑 臺中市</div>
+    </div>
+    <div class="winner-points"><strong>3,367,724,000</strong><span>元</span></div>
+  </div>
+  <div class="table-wrap">
+    <table aria-label="體育運動經費總額 六都組 排名">
+      <thead><tr><th class="rank">名次</th><th>縣市</th><th>數據(元)</th><th class="change">升降¹</th></tr></thead>
+      <tbody><tr class="winner-row"><td class="rank"><span class="medal m1">1</span></td><td class="city">臺中市</td><td class="score">3,367,724,000</td><td class="change up">↑1</td></tr><tr class=""><td class="rank"><span class="medal m2">2</span></td><td class="city">臺北市</td><td class="score">2,804,357,714</td><td class="change same">—</td></tr><tr class=""><td class="rank"><span class="medal m3">3</span></td><td class="city">臺南市</td><td class="score">2,391,583,000</td><td class="change same">—</td></tr><tr class=""><td class="rank">4</td><td class="city">新北市</td><td class="score">1,975,635,000</td><td class="change down">↓2</td></tr><tr class=""><td class="rank">5</td><td class="city">高雄市</td><td class="score">1,661,363,380</td><td class="change same">—</td></tr><tr class=""><td class="rank">6</td><td class="city">桃園市</td><td class="score">1,396,450,000</td><td class="change up">↑1</td></tr></tbody>
+    </table>
+  </div>
+</section><section class="panel p-budget-total-county">
+  <div class="winner-card">
+    <div>
+      <div class="winner-kicker">一般縣市組｜體育運動經費總額 第一名</div>
+      <div class="winner-name">👑 雲林縣</div>
+    </div>
+    <div class="winner-points"><strong>1,252,756,303</strong><span>元</span></div>
+  </div>
+  <div class="table-wrap">
+    <table aria-label="體育運動經費總額 一般縣市組 排名">
+      <thead><tr><th class="rank">名次</th><th>縣市</th><th>數據(元)</th><th class="change">升降¹</th></tr></thead>
+      <tbody><tr class="winner-row"><td class="rank"><span class="medal m1">1</span></td><td class="city">雲林縣</td><td class="score">1,252,756,303</td><td class="change same">—</td></tr><tr class=""><td class="rank"><span class="medal m2">2</span></td><td class="city">屏東縣</td><td class="score">746,021,000</td><td class="change up">↑2</td></tr><tr class=""><td class="rank"><span class="medal m3">3</span></td><td class="city">彰化縣</td><td class="score">662,012,491</td><td class="change up">↑1</td></tr><tr class=""><td class="rank">4</td><td class="city">南投縣</td><td class="score">474,583,000</td><td class="change down">↓1</td></tr><tr class=""><td class="rank">5</td><td class="city">新竹縣</td><td class="score">461,489,000</td><td class="change up">↑6</td></tr><tr class=""><td class="rank">6</td><td class="city">宜蘭縣</td><td class="score">409,563,000</td><td class="change same">—</td></tr><tr class=""><td class="rank">7</td><td class="city">嘉義市</td><td class="score">385,434,000</td><td class="change down">↓1</td></tr><tr class=""><td class="rank">8</td><td class="city">苗栗縣</td><td class="score">380,593,000</td><td class="change same">—</td></tr><tr class=""><td class="rank">9</td><td class="city">基隆市</td><td class="score">336,245,310</td><td class="change up">↑3</td></tr><tr class=""><td class="rank">10</td><td class="city">新竹市</td><td class="score">310,367,000</td><td class="change same">—</td></tr></tbody>
+    </table>
+  </div>
+</section><section class="panel p-budget-percap-metro">
+  <div class="winner-card">
+    <div>
+      <div class="winner-kicker">六都組｜平均每人運動經費 第一名</div>
+      <div class="winner-name">👑 臺南市</div>
+    </div>
+    <div class="winner-points"><strong>1,286.73</strong><span>元</span></div>
+  </div>
+  <div class="table-wrap">
+    <table aria-label="平均每人運動經費 六都組 排名">
+      <thead><tr><th class="rank">名次</th><th>縣市</th><th>數據(元)</th><th class="change">升降¹</th></tr></thead>
+      <tbody><tr class="winner-row"><td class="rank"><span class="medal m1">1</span></td><td class="city">臺南市</td><td class="score">1,286.73</td><td class="change up">↑1</td></tr><tr class=""><td class="rank"><span class="medal m2">2</span></td><td class="city">臺中市</td><td class="score">1,177.28</td><td class="change down">↓1</td></tr><tr class=""><td class="rank"><span class="medal m3">3</span></td><td class="city">臺北市</td><td class="score">1,125.86</td><td class="change same">—</td></tr><tr class=""><td class="rank">4</td><td class="city">高雄市</td><td class="score">608.24</td><td class="change same">—</td></tr><tr class=""><td class="rank">5</td><td class="city">桃園市</td><td class="score">597.12</td><td class="change same">—</td></tr><tr class=""><td class="rank">6</td><td class="city">新北市</td><td class="score">488.17</td><td class="change same">—</td></tr></tbody>
+    </table>
+  </div>
+</section><section class="panel p-budget-percap-county">
+  <div class="winner-card">
+    <div>
+      <div class="winner-kicker">一般縣市組｜平均每人運動經費 第一名</div>
+      <div class="winner-name">👑 連江縣</div>
+    </div>
+    <div class="winner-points"><strong>4,984.30</strong><span>元</span></div>
+  </div>
+  <div class="table-wrap">
+    <table aria-label="平均每人運動經費 一般縣市組 排名">
+      <thead><tr><th class="rank">名次</th><th>縣市</th><th>數據(元)</th><th class="change">升降¹</th></tr></thead>
+      <tbody><tr class="winner-row"><td class="rank"><span class="medal m1">1</span></td><td class="city">連江縣</td><td class="score">4,984.30</td><td class="change same">—</td></tr><tr class=""><td class="rank"><span class="medal m2">2</span></td><td class="city">雲林縣</td><td class="score">1,902.65</td><td class="change up">↑4</td></tr><tr class=""><td class="rank"><span class="medal m3">3</span></td><td class="city">金門縣</td><td class="score">1,605.99</td><td class="change same">—</td></tr><tr class=""><td class="rank">4</td><td class="city">嘉義市</td><td class="score">1,470.13</td><td class="change down">↓2</td></tr><tr class=""><td class="rank">5</td><td class="city">南投縣</td><td class="score">1,004.84</td><td class="change up">↑9</td></tr><tr class=""><td class="rank">6</td><td class="city">屏東縣</td><td class="score">945.24</td><td class="change up">↑3</td></tr><tr class=""><td class="rank">7</td><td class="city">基隆市</td><td class="score">930.29</td><td class="change same">—</td></tr><tr class=""><td class="rank">8</td><td class="city">澎湖縣</td><td class="score">917.22</td><td class="change down">↓3</td></tr><tr class=""><td class="rank">9</td><td class="city">宜蘭縣</td><td class="score">911.74</td><td class="change up">↑4</td></tr><tr class=""><td class="rank">10</td><td class="city">新竹縣</td><td class="score">776.08</td><td class="change down">↓2</td></tr></tbody>
+    </table>
+  </div>
+</section>
+<div class="foot"><div>資料：2026《遠見》運動城市大調查<br>依競技運動類 11 項指標整理；六都與一般縣市分組排名。</div><div class="brand">表格整理｜遠見城市學</div></div>
+</div>
+</section>
+</div>
+<script>
+(function(){
+  function sendHeight(){
+    var body = document.body;
+    var doc = document.documentElement;
+    var height = Math.max(body.scrollHeight, body.offsetHeight, doc.clientHeight, doc.scrollHeight, doc.offsetHeight);
+    window.parent.postMessage({ type: 'sports-city-2026-height', height: height }, '*');
+  }
+  window.addEventListener('load', function(){ sendHeight(); setTimeout(sendHeight,120); setTimeout(sendHeight,500); });
+  document.addEventListener('change', function(e){ if (e.target && e.target.matches('input[type="radio"]')) { requestAnimationFrame(function(){ sendHeight(); setTimeout(sendHeight,80); }); } });
+  if ('ResizeObserver' in window) { var ro = new ResizeObserver(function(){ sendHeight(); }); ro.observe(document.documentElement); ro.observe(document.body); } else { window.addEventListener('resize', sendHeight); }
+})();
+</script>
+</body>
+</html>
