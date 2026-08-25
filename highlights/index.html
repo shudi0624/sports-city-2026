@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>2026《遠見》22縣市運動之最</title>
+<script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+<style>
+:root{--green:#13b05d;--green-deep:#0d7f46;--green-dark:#0a5f35;--yellow:#ffd21a;--orange:#ffd21a;--active:#e77b16;--ink:#173d2d;--muted:#6f7f76;--line:#dce8e1;--paper:#fffdf5}
+*{box-sizing:border-box}body{margin:0;background:transparent;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif;color:var(--ink)}
+.wrap{max-width:1080px;margin:0 auto;padding:0 0 12px}.shell{overflow:hidden;border:1px solid var(--line);border-radius:24px;background:linear-gradient(180deg,#fbfffc,#fffdf5);box-shadow:0 16px 34px rgba(8,95,53,.08)}
+.hero{position:relative;overflow:hidden;padding:16px 20px 14px;background:linear-gradient(120deg,var(--green-deep),var(--green));color:#fff}.hero:after{content:"";position:absolute;right:-45px;top:-28px;width:300px;height:110px;border-radius:999px;background:repeating-linear-gradient(135deg,rgba(247,198,0,.24) 0 18px,rgba(255,255,255,.10) 18px 36px,rgba(22,118,229,.14) 36px 54px)}
+.eyebrow{font-size:11px;font-weight:900;letter-spacing:.18em;color:#fff3a3;margin-bottom:4px}.title{margin:0;font-size:28px;line-height:1.12;font-weight:950}.title b{color:var(--yellow)}.sub{font-size:12px;margin-top:4px;opacity:.92}
+.body{padding:14px}.lead{margin:0 0 12px;font-size:14px;font-weight:900;color:#617168}.layout{display:grid;grid-template-columns:220px minmax(0,1fr);gap:14px}
+.side{background:rgba(255,255,255,.78);border:1px solid #edf3ef;border-radius:18px;padding:11px}.search{width:100%;padding:10px 11px;border:1px solid #d9e6df;border-radius:10px;font-size:13px;outline:none}.chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:9px;max-height:590px;overflow:auto}.chip{border:1px solid #d9e6df;background:#fff;border-radius:999px;padding:7px 9px;font-size:12px;font-weight:850;color:#355545;cursor:pointer}.chip.active{background:#eef8ef;border-color:#99cfaa;color:var(--green-dark)}
+.mapbox{position:relative;min-height:600px;border:1px solid #edf2ef;border-radius:20px;background:#fffdf7;overflow:hidden}#map{width:100%;height:600px}
+.loading,.error{position:absolute;inset:0;display:grid;place-items:center;padding:30px;text-align:center;color:var(--muted);background:#fffdf7;z-index:3}.error{display:none;color:#915454}
+.info{position:absolute;right:16px;top:16px;width:260px;background:rgba(255,255,255,.96);border:1px solid #e5ebef;border-radius:16px;overflow:hidden;box-shadow:0 12px 28px rgba(46,70,104,.17);z-index:5}.info-head{padding:9px 12px;background:#8da2bb;color:#fff;font-size:15px;font-weight:900}.info-body{padding:12px}.info-title{font-size:16px;font-weight:950;color:#8a6710;margin-bottom:6px}.info-feature{font-size:15px;line-height:1.55;color:#354d43}.hint{font-size:11px;color:var(--muted);margin-top:7px}
+.foot{display:flex;justify-content:space-between;align-items:flex-end;gap:10px;padding-top:10px;font-size:10px;color:#788780;line-height:1.55}.brand{font-weight:950;color:var(--green-dark);white-space:nowrap}
+@media(max-width:900px){.layout{grid-template-columns:1fr}.chips{max-height:none}.mapbox{min-height:auto}#map{height:560px}.info{position:static;width:auto;margin:10px}}
+@media(max-width:640px){.shell{border-radius:0;border-left:0;border-right:0}.hero{padding:14px 15px 12px}.title{font-size:22px}.body{padding:9px}.lead{font-size:13px;margin-bottom:8px}.side{padding:9px;border-radius:15px}.chip{font-size:11px;padding:6px 8px}#map{height:500px}.info-title{font-size:15px}.info-feature{font-size:14px}.foot{font-size:9px}}
+</style>
+</head>
+<body>
+<div class="wrap"><section class="shell">
+<header class="hero"><div class="eyebrow">SPORT CITY 2026</div><h2 class="title">2026《遠見》<b>22縣市運動之最</b></h2><div class="sub">真實行政區界線｜滑過或點選縣市查看運動亮點</div></header>
+<div class="body">
+<p class="lead">點擊各縣市，查看運動亮點資訊</p>
+<div class="layout">
+<aside class="side"><input id="search" class="search" placeholder="🔍 搜尋縣市"><div class="chips"><button class="chip" data-county="臺北市" type="button">臺北市</button><button class="chip" data-county="屏東縣" type="button">屏東縣</button><button class="chip" data-county="連江縣" type="button">連江縣</button><button class="chip" data-county="高雄市" type="button">高雄市</button><button class="chip" data-county="花蓮縣" type="button">花蓮縣</button><button class="chip" data-county="新北市" type="button">新北市</button><button class="chip" data-county="彰化縣" type="button">彰化縣</button><button class="chip" data-county="嘉義市" type="button">嘉義市</button><button class="chip" data-county="臺中市" type="button">臺中市</button><button class="chip" data-county="南投縣" type="button">南投縣</button><button class="chip" data-county="新竹市" type="button">新竹市</button><button class="chip" data-county="臺南市" type="button">臺南市</button><button class="chip" data-county="雲林縣" type="button">雲林縣</button><button class="chip" data-county="新竹縣" type="button">新竹縣</button><button class="chip" data-county="基隆市" type="button">基隆市</button><button class="chip" data-county="宜蘭縣" type="button">宜蘭縣</button><button class="chip" data-county="桃園市" type="button">桃園市</button><button class="chip" data-county="苗栗縣" type="button">苗栗縣</button><button class="chip" data-county="嘉義縣" type="button">嘉義縣</button><button class="chip" data-county="臺東縣" type="button">臺東縣</button><button class="chip" data-county="金門縣" type="button">金門縣</button><button class="chip" data-county="澎湖縣" type="button">澎湖縣</button></div></aside>
+<section class="mapbox">
+<div id="loading" class="loading">正在載入台灣縣市行政區圖…</div><div id="error" class="error">地圖資料載入失敗，請重新整理頁面。</div>
+<div id="info" class="info"><div id="infoCounty" class="info-head">花蓮縣</div><div class="info-body"><div id="infoTitle" class="info-title">🏅 運動風氣之都</div><div id="infoFeature" class="info-feature">規律運動人口比例全台最高</div><div class="hint">滑鼠移入或點擊縣市即可切換</div></div></div>
+<div id="map"></div>
+</section></div>
+<footer class="foot"><div>資料：2026《遠見》運動城市大調查・22縣市運動特色表<br>地圖圖資：g0v twgeojson（CC0），行政區界線來源為台灣政府開放資料。</div><div class="brand">表格整理｜遠見城市學</div></footer>
+</div></section></div>
+<script>
+(function(){
+const highlights={"臺北市": {"title": "運動首善之都", "feature": "運動城市指標總績分全台第一"}, "屏東縣": {"title": "運動領銜之都", "feature": "運動城市指標總績分一般縣市第一"}, "連江縣": {"title": "競技運動之都", "feature": "競技運動總積分一般縣市第一"}, "高雄市": {"title": "鐵騎幸福之都", "feature": "自行車道長度全台第一"}, "花蓮縣": {"title": "運動風氣之都", "feature": "規律運動人口比例全台最高"}, "新北市": {"title": "運動普惠之都", "feature": "校園、公有場館設施對外開放比例全台第一"}, "彰化縣": {"title": "場館普惠之都", "feature": "校園、公有場館設施對外開放數量一般縣市第一"}, "嘉義市": {"title": "運動友善之都", "feature": "公眾運動場所設施滿意度全台第一"}, "臺中市": {"title": "體育投資之都", "feature": "體育運動經費總額全台第一"}, "南投縣": {"title": "運動深耕之都", "feature": "獲贈運動村里認證比例全台第一"}, "新竹市": {"title": "運動培力之都", "feature": "基層運動選手訓練站培訓選手數一般縣市第一"}, "臺南市": {"title": "選手資源友善之都", "feature": "平均每位基層運動選手獲得訓練站培訓經費六都最高"}, "雲林縣": {"title": "體育富足之都", "feature": "體育運動經費總額一般縣市第一"}, "新竹縣": {"title": "競技優化之都", "feature": "競技運動總積分全台進步最多，進步四名"}, "基隆市": {"title": "運動村里優化之都", "feature": "獲贈運動村里認證比例全台進步最多，進步六名"}, "宜蘭縣": {"title": "運動黑馬之都", "feature": "全國性運動會積分全台進步最多，進步四名"}, "桃園市": {"title": "鐵騎黑馬之都", "feature": "自行車道長度四年成長全台第一，進步六名"}, "苗栗縣": {"title": "體育推手之都", "feature": "推動體育運動志工人數四年成長全台第一，進步六名"}, "嘉義縣": {"title": "場館普惠優化之都", "feature": "校園、公有場館設施對外開放數量四年成長全台第一，進步四名"}, "臺東縣": {"title": "場館友善優化之都", "feature": "公眾運動場所設施滿意度四年成長全台第一"}, "金門縣": {"title": "體育後援優化之都", "feature": "職業運動隊伍縣市贊助金額四年成長全台第一"}, "澎湖縣": {"title": "體育選手後援優化之都", "feature": "平均每位基層運動選手獲得訓練站培訓經費四年成長全台第一"}};
+const canonical=Object.keys(highlights);
+const aliases={
+ '台北市':'臺北市','台中市':'臺中市','台南市':'臺南市','台東縣':'臺東縣',
+ '臺北縣':'新北市','台北縣':'新北市','桃園縣':'桃園市','臺中縣':'臺中市','台中縣':'臺中市','臺南縣':'臺南市','台南縣':'臺南市','高雄縣':'高雄市'
+};
+function norm(s){return String(s||'').trim().replace(/台/g,'臺');}
+function canonicalName(s){s=norm(s); if(highlights[s]) return s; if(aliases[s]) return aliases[s]; for(const n of canonical){if(s.includes(n)||n.includes(s)) return n;} return null;}
+function featureName(f){
+  const vals=Object.values(f.properties||{});
+  for(const v of vals){if(typeof v==='string'){const n=canonicalName(v); if(n) return n;}}
+  return null;
+}
+function show(name){
+ const d=highlights[name]; if(!d) return;
+ document.getElementById('infoCounty').textContent=name;
+ document.getElementById('infoTitle').textContent='🏅 '+d.title;
+ document.getElementById('infoFeature').textContent=d.feature;
+ document.querySelectorAll('.chip').forEach(b=>b.classList.toggle('active',b.dataset.county===name));
+ if(chart) chart.dispatchAction({type:'downplay',seriesIndex:0}), chart.dispatchAction({type:'highlight',seriesIndex:0,name:name});
+}
+const chart=echarts.init(document.getElementById('map'));
+fetch('https://cdn.jsdelivr.net/gh/g0v/twgeojson@master/json/twCounty2010.geo.json')
+ .then(r=>{if(!r.ok) throw new Error('HTTP '+r.status); return r.json();})
+ .then(geo=>{
+   geo.features=geo.features.filter(f=>{const n=featureName(f); if(!n) return false; f.properties=f.properties||{}; f.properties.name=n; return true;});
+   echarts.registerMap('taiwan22', geo, {
+     '連江縣': { left: 119.55, top: 25.20, width: 0.23 },
+     '金門縣': { left: 119.52, top: 24.70, width: 0.25 },
+     '澎湖縣': { left: 119.72, top: 23.98, width: 0.28 }
+   });
+   document.getElementById('loading').style.display='none';
+   chart.setOption({
+     animationDuration:350,
+     tooltip:{trigger:'item',backgroundColor:'#fff',borderColor:'#dbe6df',borderWidth:1,textStyle:{color:'#173d2d'},formatter:p=>{const d=highlights[p.name]; return d?`<b>${p.name}</b><br>🏅 ${d.title}<br>${d.feature}`:p.name;}},
+     geo:{map:'taiwan22',roam:false,layoutCenter:['54%','50%'],layoutSize:'98%',itemStyle:{areaColor:'#ffd21a',borderColor:'#fff8dc',borderWidth:1.5},emphasis:{itemStyle:{areaColor:'#e77b16',borderColor:'#ffffff',borderWidth:2.2},label:{show:true,color:'#ffffff',fontWeight:'bold',textBorderColor:'#9c4b06',textBorderWidth:2}},select:{itemStyle:{areaColor:'#e77b16',borderColor:'#ffffff',borderWidth:2.2},label:{show:true,color:'#ffffff',textBorderColor:'#9c4b06',textBorderWidth:2}},label:{show:true,color:'#6e4a00',fontSize:10,fontWeight:'bold',textBorderColor:'#fff6c7',textBorderWidth:2},selectedMode:'single'},
+     series:[{type:'map',map:'taiwan22',geoIndex:0,data:canonical.map(name=>({name})),silent:false}]
+   });
+   chart.on('mouseover',p=>{if(highlights[p.name]) show(p.name);});
+   chart.on('click',p=>{if(highlights[p.name]) show(p.name);});
+   show('花蓮縣'); sendHeight(); setTimeout(sendHeight,200);
+ })
+ .catch(err=>{console.error(err);document.getElementById('loading').style.display='none';document.getElementById('error').style.display='grid';sendHeight();});
+
+document.querySelectorAll('.chip').forEach(b=>b.addEventListener('click',()=>show(b.dataset.county)));
+document.getElementById('search').addEventListener('input',e=>{const q=norm(e.target.value); let first=null; document.querySelectorAll('.chip').forEach(b=>{const ok=!q||norm(b.dataset.county).includes(q); b.hidden=!ok; if(ok&&!first) first=b.dataset.county;}); if(q&&first) show(first); sendHeight();});
+window.addEventListener('resize',()=>{chart.resize();sendHeight();});
+function sendHeight(){const b=document.body,d=document.documentElement,h=Math.max(b.scrollHeight,b.offsetHeight,d.scrollHeight,d.offsetHeight,d.clientHeight);window.parent.postMessage({type:'sports-city-2026-height',height:h},'*');}
+window.addEventListener('load',()=>{sendHeight();setTimeout(sendHeight,500);});
+if('ResizeObserver' in window) new ResizeObserver(()=>sendHeight()).observe(document.body);
+})();
+</script>
+</body></html>
