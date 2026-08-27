@@ -18,7 +18,20 @@
 .info{position:static;width:100%;margin-top:8px;background:rgba(255,255,255,.98);border:1px solid #e5ebef;border-radius:14px;overflow:hidden;box-shadow:0 8px 18px rgba(46,70,104,.10)}.info-head{padding:8px 10px;background:#8da2bb;color:#fff;font-size:15px;font-weight:900}.info-body{padding:10px}.info-title{font-size:15px;font-weight:950;color:#7c6110;margin-bottom:4px;line-height:1.25}.info-feature{font-size:14px;line-height:1.35;color:#354d43}.hint{font-size:10.5px;color:var(--muted);margin-top:5px;line-height:1.35}
 .foot{display:flex;justify-content:space-between;align-items:flex-end;gap:10px;padding-top:10px;font-size:10px;color:#788780;line-height:1.55}.brand{font-weight:950;color:var(--green-dark);white-space:nowrap}
 @media(max-width:900px){.layout{grid-template-columns:1fr}.chips{max-height:none}.mapbox{min-height:auto}#map{height:560px}.info{width:100%;margin-top:10px}}
-@media(max-width:640px){.shell{border-radius:0;border-left:0;border-right:0}.hero{padding:14px 15px 12px}.title{font-size:22px}.body{padding:9px}.lead{font-size:13px;margin-bottom:8px}.side{padding:9px;border-radius:15px}.chip{font-size:11px;padding:6px 8px}#map{height:500px}.info-title{font-size:15px}.info-feature{font-size:14px}.foot{font-size:9px}}
+@media(max-width:640px){
+  .shell{border-radius:0;border-left:0;border-right:0}
+  .hero{padding:14px 15px 12px}
+  .title{font-size:22px}
+  .body{padding:9px}
+  .lead{font-size:13px;margin-bottom:8px}
+  .side{padding:9px;border-radius:15px}
+  .chip{font-size:11px;padding:6px 8px}
+  .mapbox{min-height:620px}
+  #map{height:620px}
+  .info-title{font-size:15px}
+  .info-feature{font-size:14px}
+  .foot{font-size:9px}
+}
 </style>
 </head>
 <body>
@@ -72,8 +85,8 @@ fetch('https://cdn.jsdelivr.net/gh/g0v/twgeojson@master/json/twCounty2010.geo.js
    document.getElementById('loading').style.display='none';
    chart.setOption({
      animationDuration:350,
-     tooltip:{trigger:'item',backgroundColor:'#fff',borderColor:'#dbe6df',borderWidth:1,textStyle:{color:'#173d2d'},formatter:p=>{const d=highlights[p.name]; return d?`<b>${p.name}</b><br>🏅 ${d.title}<br>${d.feature}`:p.name;}},
-     geo:{map:'taiwan22',roam:false,layoutCenter:['55%','50%'],layoutSize:'98%',itemStyle:{areaColor:'#ffd21a',borderColor:'#fff8dc',borderWidth:1.5},emphasis:{itemStyle:{areaColor:'#67B96A',borderColor:'#fff8dc',borderWidth:2.2,shadowBlur:8,shadowColor:'rgba(103,185,106,.24)'},label:{show:true,color:'#ffffff',fontWeight:'bold',textBorderColor:'#3E8744',textBorderWidth:2}},select:{itemStyle:{areaColor:'#67B96A',borderColor:'#fff8dc',borderWidth:2.4,shadowBlur:10,shadowColor:'rgba(103,185,106,.28)'},label:{show:true,color:'#ffffff',textBorderColor:'#3E8744',textBorderWidth:2}},label:{show:true,color:'#6e4a00',fontSize:10,fontWeight:'bold',textBorderColor:'#fff6c7',textBorderWidth:2},selectedMode:'single'},
+     tooltip:{trigger:'item',confine:true,appendToBody:false,enterable:false,backgroundColor:'#fff',borderColor:'#dbe6df',borderWidth:1,textStyle:{color:'#173d2d'},extraCssText:'max-width:230px;white-space:normal;line-height:1.45;box-shadow:0 8px 18px rgba(46,70,104,.14);',position:function(point,params,dom,rect,size){var vw=size.viewSize[0],vh=size.viewSize[1],cw=size.contentSize[0],ch=size.contentSize[1];var x=point[0]+12,y=point[1]+12;if(x+cw>vw-8)x=point[0]-cw-12;if(y+ch>vh-8)y=vh-ch-8;if(y<8)y=8;if(x<8)x=8;return [x,y];},formatter:p=>{const d=highlights[p.name]; return d?`<b>${p.name}</b><br>🏅 ${d.title}<br>${d.feature}`:p.name;}},
+     geo:{map:'taiwan22',roam:false,layoutCenter:window.innerWidth<=640?['52%','51%']:['55%','50%'],layoutSize:window.innerWidth<=640?'112%':'98%',itemStyle:{areaColor:'#ffd21a',borderColor:'#fff8dc',borderWidth:1.5},emphasis:{itemStyle:{areaColor:'#67B96A',borderColor:'#fff8dc',borderWidth:2.2,shadowBlur:8,shadowColor:'rgba(103,185,106,.24)'},label:{show:true,color:'#ffffff',fontWeight:'bold',textBorderColor:'#3E8744',textBorderWidth:2}},select:{itemStyle:{areaColor:'#67B96A',borderColor:'#fff8dc',borderWidth:2.4,shadowBlur:10,shadowColor:'rgba(103,185,106,.28)'},label:{show:true,color:'#ffffff',textBorderColor:'#3E8744',textBorderWidth:2}},label:{show:true,color:'#6e4a00',fontSize:window.innerWidth<=640?11:10,fontWeight:'bold',textBorderColor:'#fff6c7',textBorderWidth:2},selectedMode:'single'},
      series:[{type:'map',map:'taiwan22',geoIndex:0,data:canonical.map(name=>({name})),silent:false}]
    });
    chart.on('mouseover',p=>{if(highlights[p.name]) show(p.name);});
@@ -84,7 +97,7 @@ fetch('https://cdn.jsdelivr.net/gh/g0v/twgeojson@master/json/twCounty2010.geo.js
 
 document.querySelectorAll('.chip').forEach(b=>b.addEventListener('click',()=>show(b.dataset.county)));
 document.getElementById('search').addEventListener('input',e=>{const q=norm(e.target.value); let first=null; document.querySelectorAll('.chip').forEach(b=>{const ok=!q||norm(b.dataset.county).includes(q); b.hidden=!ok; if(ok&&!first) first=b.dataset.county;}); if(q&&first) show(first); sendHeight();});
-window.addEventListener('resize',()=>{chart.resize();sendHeight();});
+window.addEventListener('resize',()=>{chart.resize();chart.setOption({geo:{layoutCenter:window.innerWidth<=640?['52%','51%']:['55%','50%'],layoutSize:window.innerWidth<=640?'112%':'98%',label:{fontSize:window.innerWidth<=640?11:10}}});sendHeight();});
 function sendHeight(){const b=document.body,d=document.documentElement,h=Math.max(b.scrollHeight,b.offsetHeight,d.scrollHeight,d.offsetHeight,d.clientHeight);window.parent.postMessage({type:'sports-city-2026-height',height:h},'*');}
 window.addEventListener('load',()=>{sendHeight();setTimeout(sendHeight,500);});
 if('ResizeObserver' in window) new ResizeObserver(()=>sendHeight()).observe(document.body);
