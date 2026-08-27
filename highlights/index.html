@@ -53,8 +53,8 @@
   .chip{flex:0 0 auto;font-size:11px;padding:6px 9px}
 
   /* 地圖縮短但完整顯示，避免被 CMS iframe 底部裁切 */
-  .mapbox{min-height:430px;border-radius:16px}
-  #map{height:430px}
+  .mapbox{min-height:400px;border-radius:16px}
+  #map{height:400px}
 
   .foot{font-size:8.5px;padding-top:7px}
 }
@@ -96,7 +96,7 @@ function show(name){
  document.getElementById('infoTitle').textContent='🏅 '+d.title;
  document.getElementById('infoFeature').textContent=d.feature;
  document.querySelectorAll('.chip').forEach(b=>b.classList.toggle('active',b.dataset.county===name));
- if(chart) chart.dispatchAction({type:'downplay',seriesIndex:0}), chart.dispatchAction({type:'highlight',seriesIndex:0,name:name});
+ if(chart){ chart.dispatchAction({type:'downplay',seriesIndex:0}); chart.dispatchAction({type:'highlight',seriesIndex:0,name:name}); }
 }
 const chart=echarts.init(document.getElementById('map'));
 fetch('https://cdn.jsdelivr.net/gh/g0v/twgeojson@master/json/twCounty2010.geo.json')
@@ -113,29 +113,47 @@ fetch('https://cdn.jsdelivr.net/gh/g0v/twgeojson@master/json/twCounty2010.geo.js
    chart.setOption({
      animationDuration:350,
      tooltip:{trigger:'item',backgroundColor:'#fff',borderColor:'#dbe6df',borderWidth:1,textStyle:{color:'#173d2d'},formatter:p=>{const d=highlights[p.name]; return d?`<b>${p.name}</b><br>🏅 ${d.title}<br>${d.feature}`:p.name;}},
-     geo:{map:'taiwan22',roam:false,layoutCenter:mobileMap?['54%','48%']:['55%','50%'],layoutSize:mobileMap?'84%':'98%',itemStyle:{areaColor:'#ffd21a',borderColor:'#fff8dc',borderWidth:1.5},emphasis:{itemStyle:{areaColor:'#67B96A',borderColor:'#fff8dc',borderWidth:2.2,shadowBlur:8,shadowColor:'rgba(103,185,106,.24)'},label:{show:true,color:'#ffffff',fontWeight:'bold',textBorderColor:'#3E8744',textBorderWidth:2}},select:{itemStyle:{areaColor:'#67B96A',borderColor:'#fff8dc',borderWidth:2.4,shadowBlur:10,shadowColor:'rgba(103,185,106,.28)'},label:{show:true,color:'#ffffff',textBorderColor:'#3E8744',textBorderWidth:2}},label:{show:true,color:'#6e4a00',fontSize:10,fontWeight:'bold',textBorderColor:'#fff6c7',textBorderWidth:2},selectedMode:'single'},
-     series:[{type:'map',map:'taiwan22',geoIndex:0,data:canonical.map(name=>({name})),silent:false}]
+     series:[{
+       type:'map',
+       map:'taiwan22',
+       roam:false,
+       selectedMode:'single',
+       left:mobileMap?'5%':'7%',
+       right:mobileMap?'5%':'7%',
+       top:mobileMap?'2%':'4%',
+       bottom:mobileMap?'2%':'4%',
+       aspectScale:0.78,
+       itemStyle:{areaColor:'#ffd21a',borderColor:'#fff8dc',borderWidth:1.5},
+       emphasis:{itemStyle:{areaColor:'#67B96A',borderColor:'#fff8dc',borderWidth:2.2,shadowBlur:8,shadowColor:'rgba(103,185,106,.24)'},label:{show:true,color:'#ffffff',fontWeight:'bold',textBorderColor:'#3E8744',textBorderWidth:2}},
+       select:{itemStyle:{areaColor:'#67B96A',borderColor:'#fff8dc',borderWidth:2.4,shadowBlur:10,shadowColor:'rgba(103,185,106,.28)'},label:{show:true,color:'#ffffff',textBorderColor:'#3E8744',textBorderWidth:2}},
+       label:{show:true,color:'#6e4a00',fontSize:mobileMap?8:10,fontWeight:'bold',textBorderColor:'#fff6c7',textBorderWidth:2},
+       data:canonical.map(name=>({name})),
+       silent:false
+     }]
    });
    chart.on('mouseover',p=>{if(highlights[p.name]) show(p.name);});
    chart.on('click',p=>{if(highlights[p.name]) show(p.name);});
-   show('花蓮縣'); sendHeight(); setTimeout(sendHeight,200);
+   show('花蓮縣'); requestAnimationFrame(fitMap); setTimeout(fitMap,80); setTimeout(fitMap,300); sendHeight();
  })
  .catch(err=>{console.error(err);document.getElementById('loading').style.display='none';document.getElementById('error').style.display='grid';sendHeight();});
 
 document.querySelectorAll('.chip').forEach(b=>b.addEventListener('click',()=>show(b.dataset.county)));
 document.getElementById('search').addEventListener('input',e=>{const q=norm(e.target.value); let first=null; document.querySelectorAll('.chip').forEach(b=>{const ok=!q||norm(b.dataset.county).includes(q); b.hidden=!ok; if(ok&&!first) first=b.dataset.county;}); if(q&&first) show(first); sendHeight();});
-window.addEventListener('resize',()=>{
+function fitMap(){
+  if(!chart) return;
+  const w=document.getElementById('map').clientWidth;
+  const isMobile=w<=640;
   chart.resize();
-  const isMobile = window.matchMedia('(max-width: 640px)').matches;
-  chart.setOption({
-    geo:{
-      layoutCenter:isMobile?['54%','48%']:['55%','50%'],
-      layoutSize:isMobile?'84%':'98%',
-      label:{fontSize:isMobile?8:10}
-    }
-  });
+  chart.setOption({series:[{
+    left:isMobile?'5%':'7%',
+    right:isMobile?'5%':'7%',
+    top:isMobile?'2%':'4%',
+    bottom:isMobile?'2%':'4%',
+    label:{fontSize:isMobile?8:10}
+  }]});
   sendHeight();
-});
+}
+window.addEventListener('resize',()=>{requestAnimationFrame(fitMap);});
 function sendHeight(){const b=document.body,d=document.documentElement,h=Math.max(b.scrollHeight,b.offsetHeight,d.scrollHeight,d.offsetHeight,d.clientHeight);window.parent.postMessage({type:'sports-city-2026-height',height:h},'*');}
 window.addEventListener('load',()=>{sendHeight();setTimeout(sendHeight,500);});
 if('ResizeObserver' in window) new ResizeObserver(()=>sendHeight()).observe(document.body);
