@@ -29,8 +29,8 @@
   .chips{display:none;max-height:210px;overflow-y:auto;margin-top:7px;padding:2px 0 2px}
   .chips.open{display:flex}
   .chip{font-size:11px;padding:6px 8px}
-  .mapbox{min-height:500px}
-  #map{height:500px}
+  .mapbox{min-height:540px}
+  #map{height:540px}
   .info-title{font-size:15px}
   .info-feature{font-size:14px}
   .foot{font-size:9px}
@@ -89,20 +89,19 @@ fetch('https://cdn.jsdelivr.net/gh/g0v/twgeojson@master/json/twCounty2010.geo.js
  .then(r=>{if(!r.ok) throw new Error('HTTP '+r.status); return r.json();})
  .then(geo=>{
    geo.features=geo.features.filter(f=>{const n=featureName(f); if(!n) return false; f.properties=f.properties||{}; f.properties.name=n; return true;});
-   /* 離島依實際地理方位重新定位：
-      連江在台灣西北側、金門在台灣西側、澎湖在台灣海峽中南段。 */
+   /* 手機視覺版：維持離島正確方位，但適度壓縮與本島的視覺距離，
+      讓金門、澎湖、連江在小螢幕上仍能辨識，同時讓台灣本島佔比更接近參考圖。
+      方位關係：連江西北、金門西側偏北、澎湖西側中南段。 */
    echarts.registerMap('taiwan22', geo, {
-     /* 依台灣全圖常見視覺配置重新排列離島：
-        連江在台灣西北側上方、金門在中北部西側、澎湖在中南部西側 */
-     '連江縣': { left: 119.30, top: 25.82, width: 0.26 },
-     '金門縣': { left: 118.18, top: 24.42, width: 0.36 },
-     '澎湖縣': { left: 119.18, top: 23.52, width: 0.42 }
+     '連江縣': { left: 119.72, top: 25.55, width: 0.20 },
+     '金門縣': { left: 119.22, top: 24.48, width: 0.24 },
+     '澎湖縣': { left: 119.46, top: 23.62, width: 0.30 }
    });
    document.getElementById('loading').style.display='none';
    chart.setOption({
      animationDuration:350,
      tooltip:{trigger:'item',confine:true,appendToBody:false,enterable:false,backgroundColor:'#fff',borderColor:'#dbe6df',borderWidth:1,textStyle:{color:'#173d2d'},extraCssText:'max-width:230px;white-space:normal;line-height:1.45;box-shadow:0 8px 18px rgba(46,70,104,.14);',position:function(point,params,dom,rect,size){var vw=size.viewSize[0],vh=size.viewSize[1],cw=size.contentSize[0],ch=size.contentSize[1];var x=point[0]+12,y=point[1]+12;if(x+cw>vw-8)x=point[0]-cw-12;if(y+ch>vh-8)y=vh-ch-8;if(y<8)y=8;if(x<8)x=8;return [x,y];},formatter:p=>{const d=highlights[p.name]; return d?`<b>${p.name}</b><br>🏅 ${d.title}<br>${d.feature}`:p.name;}},
-     geo:{map:'taiwan22',roam:false,layoutCenter:window.innerWidth<=640?['53%','50%']:['55%','50%'],layoutSize:window.innerWidth<=640?'126%':'98%',itemStyle:{areaColor:'#ffd21a',borderColor:'#fff8dc',borderWidth:1.5},emphasis:{itemStyle:{areaColor:'#67B96A',borderColor:'#fff8dc',borderWidth:2.2,shadowBlur:8,shadowColor:'rgba(103,185,106,.24)'},label:{show:true,color:'#ffffff',fontWeight:'bold',textBorderColor:'#3E8744',textBorderWidth:2}},select:{itemStyle:{areaColor:'#67B96A',borderColor:'#fff8dc',borderWidth:2.4,shadowBlur:10,shadowColor:'rgba(103,185,106,.28)'},label:{show:true,color:'#ffffff',textBorderColor:'#3E8744',textBorderWidth:2}},label:{show:true,color:'#6e4a00',fontSize:window.innerWidth<=640?11:10,fontWeight:'bold',textBorderColor:'#fff6c7',textBorderWidth:2},selectedMode:'single'},
+     geo:{map:'taiwan22',roam:false,aspectScale:0.82,layoutCenter:window.innerWidth<=640?['54%','51%']:['50%','50%'],layoutSize:window.innerWidth<=640?'128%':'96%',itemStyle:{areaColor:'#ffd21a',borderColor:'#fff8dc',borderWidth:1.5},emphasis:{itemStyle:{areaColor:'#67B96A',borderColor:'#fff8dc',borderWidth:2.2,shadowBlur:8,shadowColor:'rgba(103,185,106,.24)'},label:{show:true,color:'#ffffff',fontWeight:'bold',textBorderColor:'#3E8744',textBorderWidth:2}},select:{itemStyle:{areaColor:'#67B96A',borderColor:'#fff8dc',borderWidth:2.4,shadowBlur:10,shadowColor:'rgba(103,185,106,.28)'},label:{show:true,color:'#ffffff',textBorderColor:'#3E8744',textBorderWidth:2}},label:{show:true,color:'#6e4a00',fontSize:window.innerWidth<=640?11:10,fontWeight:'bold',textBorderColor:'#fff6c7',textBorderWidth:2},selectedMode:'single'},
      series:[{type:'map',map:'taiwan22',geoIndex:0,data:canonical.map(name=>({name})),silent:false}]
    });
    chart.on('mouseover',p=>{if(highlights[p.name]) updateInfo(p.name);});
@@ -132,7 +131,7 @@ document.querySelectorAll('.chip').forEach(b=>b.addEventListener('click',()=>{
   sendHeight();
 }));
 document.getElementById('search').addEventListener('input',e=>{const q=norm(e.target.value); let first=null; document.querySelectorAll('.chip').forEach(b=>{const ok=!q||norm(b.dataset.county).includes(q); b.hidden=!ok; if(ok&&!first) first=b.dataset.county;}); if(q&&first) selectCounty(first); sendHeight();});
-window.addEventListener('resize',()=>{chart.resize();chart.setOption({geo:{layoutCenter:window.innerWidth<=640?['53%','50%']:['55%','50%'],layoutSize:window.innerWidth<=640?'126%':'98%',label:{fontSize:window.innerWidth<=640?11:10}}});sendHeight();});
+window.addEventListener('resize',()=>{chart.resize();chart.setOption({geo:{aspectScale:0.82,layoutCenter:window.innerWidth<=640?['54%','51%']:['50%','50%'],layoutSize:window.innerWidth<=640?'128%':'96%',label:{fontSize:window.innerWidth<=640?10:10}}});sendHeight();});
 function sendHeight(){const b=document.body,d=document.documentElement,h=Math.max(b.scrollHeight,b.offsetHeight,d.scrollHeight,d.offsetHeight,d.clientHeight);window.parent.postMessage({type:'sports-city-2026-height',height:h},'*');}
 window.addEventListener('load',()=>{sendHeight();setTimeout(sendHeight,500);});
 if('ResizeObserver' in window) new ResizeObserver(()=>sendHeight()).observe(document.body);
