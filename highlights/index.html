@@ -89,10 +89,14 @@ fetch('https://cdn.jsdelivr.net/gh/g0v/twgeojson@master/json/twCounty2010.geo.js
  .then(r=>{if(!r.ok) throw new Error('HTTP '+r.status); return r.json();})
  .then(geo=>{
    geo.features=geo.features.filter(f=>{const n=featureName(f); if(!n) return false; f.properties=f.properties||{}; f.properties.name=n; return true;});
+   /* 離島依實際地理方位重新定位：
+      連江在台灣西北側、金門在台灣西側、澎湖在台灣海峽中南段。 */
    echarts.registerMap('taiwan22', geo, {
-     '連江縣': { left: 119.55, top: 25.20, width: 0.23 },
-     '金門縣': { left: 119.52, top: 24.70, width: 0.25 },
-     '澎湖縣': { left: 119.72, top: 23.98, width: 0.28 }
+     /* 依台灣全圖常見視覺配置重新排列離島：
+        連江在台灣西北側上方、金門在中北部西側、澎湖在中南部西側 */
+     '連江縣': { left: 119.30, top: 25.82, width: 0.26 },
+     '金門縣': { left: 118.18, top: 24.42, width: 0.36 },
+     '澎湖縣': { left: 119.18, top: 23.52, width: 0.42 }
    });
    document.getElementById('loading').style.display='none';
    chart.setOption({
